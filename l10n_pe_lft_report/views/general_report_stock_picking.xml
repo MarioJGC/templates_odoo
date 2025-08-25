@@ -1,0 +1,1535 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!--    Parte derecha de stock picking-->
+    <template id="report_right_header_stock_picking_lft">
+        <div class="col-6  text-center">
+            <div class="row">
+                <div class="col-2"/>
+                <div class="margin-top: 5px; height: 400px; col-10" style="border: 1px solid #a7a9ac;">
+                    <div style="justify-content: center; padding: 20px 8px 20px 8px;
+                             justify-content: center;">
+                        <div t-if="o.company_id.partner_id.vat"
+                             style="font-family: Calibri, Arial, sans-serif; font-size: 16px; color:#2c2b2b; margin-bottom: 10px;">
+                            RUC:
+                            <span t-field="o.company_id.partner_id.vat"/>
+                        </div>
+                        <span class="text-center"
+                              style="justify-content: center; padding-top: 10px; font-family: Calibri, Arial, sans-serif; font-size: 18px; color:#2c2b2b; margin-bottom: 10px;">
+                            GUÍA DE REMISIÓN ELECTRÓNICA
+                        </span>
+                        <br/>
+                        <span class="text-center"
+                              style="font-family: Calibri, Arial, sans-serif; font-size: 16px; color:#2c2b2b; justify-content: center; margin-bottom: 10px;">
+                            <span class="text-center" t-field="o.name">SO0000</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template id="report_right_header_stock_picking_wurfel">
+        <div class="col-5 text-center">
+            <div class="row">
+                <div class="col-2"/>
+                <div class="col-10" style="justify-content: center; border: 1px solid #a7a9ac;">
+                    <div style="padding: 10px 8px 10px 8px;">
+                        RUC:
+                        <t t-if="o.company_id.partner_id.vat">
+                            <span t-field="o.company_id.partner_id.vat"/>
+                        </t>
+                        <h6 class="text-center">
+                            GUÍA DE REMISIÓN
+                            <br/>
+                            ELECTRÓNICA
+                        </h6>
+                        <span class="text-center" t-field="o.name">SO0000</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!--  Parte de abajo de stock picking    -->
+    <template id="report_after_header_stock_picking_lft">
+<!--        <t t-if="o.l10n_pe_edi_status == 'sent'">-->
+            <div class="row" style="padding: 8px 0 8px 8px; font-family: Calibri, Arial, sans-serif; font-size: 13px; color:#595959;
+        background:#f2f2f2; border-bottom: 1px solid #a7a9ac;">
+                <div class="col-6">
+                    <strong>DATOS DEL INICIO DEL TRASLADO</strong>
+                </div>
+                <div class="col-6">
+                    <strong>DATOS DEL DESTINATARIO</strong>
+                </div>
+            </div>
+            <div class="row" style="font-family: Calibri, Arial, sans-serif; font-size: 12px; padding-top: 5px;">
+                <div class="col-2" style="padding-left: 8px; color:#595959;">
+                    <strong>FECHA DE EMISIÓN:</strong>
+                </div>
+                <div class="col-4">
+                    <span class="m-0"
+                          style="color:#808080; text-transform: uppercase; padding: 25px 8px 0 8px;"
+                          t-field="o.date"/>
+                </div>
+                <div class="col-2" style="padding-left: 8px;">
+                    <strong>DNI / RUC:</strong>
+                </div>
+                <div class="col-4">
+                    <span style="color:#808080; text-transform: uppercase; padding-left: 8px;" class="m-0">
+                        <t t-if="o.company_id.partner_id.vat">
+                            <span t-field="o.company_id.partner_id.vat"/>
+                        </t>
+                    </span>
+                </div>
+            </div>
+            <div class="row" style="font-family: Calibri, Arial, sans-serif; font-size: 12px; padding-top: 5px;">
+                <div class="col-2" style="padding-left:8px; color:#595959;">
+                    <strong>FECHA DE INICIO DE TRASLADO:</strong>
+                </div>
+                <div class="col-4">
+                    <span style="color:#808080; padding: 25px 8px 0 8px;" t-field="o.scheduled_date"/>
+                </div>
+                <div class="col-2" style="padding-left: 8px;">
+                    <strong>RAZÓN SOCIAL:</strong>
+                </div>
+                <div class="col-4">
+                    <span style="color:#808080; padding: 25px 8px 0 8px;"
+                          t-field="o.company_id.partner_id.name"/>
+                </div>
+            </div>
+            <div class="row" style="font-family: Calibri, Arial, sans-serif; font-size: 12px;  padding-top: 5px;">
+                <div class="col-2" style="padding-left: 8px; color:#595959;">
+                    <strong>MOTIVO DE TRASLADO:</strong>
+                </div>
+                <div class="col-4">
+                    <span style="color:#808080; text-transform: uppercase; padding: 25px 8px 0 8px;" class="m-0"
+                          t-field="o.note"></span>
+                </div>
+                <div class="col-2" style="padding-left: 8px; color:#292929;">
+                    <strong>DOC. RELACIONADOS:</strong>
+                </div>
+                <div class="col-4">
+                    <span style="color:#808080; text-transform: uppercase; padding: 25px 8px 0 8px;" class="m-0"
+                          t-field="o.origin"></span>
+                </div>
+            </div>
+
+            <div class="row" style="padding: 8px 0 8px 8px; font-family: Calibri, Arial, sans-serif; font-size: 13px; color:#595959;
+        background:#f2f2f2; border-bottom: 1px solid #a7a9ac;">
+                <div class="col-6">
+                    <strong>DATOS DE PUNTO DE PARTIDA</strong>
+                </div>
+                <div class="col-6">
+                    <strong>DATOS DE PUNTO DE LLEGADA</strong>
+                </div>
+            </div>
+            <div class="row"
+                 style="padding: 10px 0 10px 8px; font-family: Calibri, Arial, sans-serif; font-size: 12px;">
+                <div class="col-6" name="div_incoming_address" style="color:#808080; padding-left: 8px;">
+                    <t t-set="show_partner" t-value="False"/>
+                    <div t-field="o.company_id.partner_id"
+                         t-options='{"widget": "contact", "fields": ["address", "name", "phone", "vat"], "no_marker": True, "phone_icons": True}'>
+                        <div class="bg-light border-1 rounded h-100 d-flex flex-column align-items-center justify-content-center p-4 opacity-75 text-muted text-center">
+                            <strong>Recipient address</strong>
+                            <div>Presence depends on the type of operation.</div>
+                        </div>
+                    </div>
+                    <!--<div t-if="o.picking_type_id.code=='incoming' and o.partner_id">
+                        <span>
+                            <strong>Vendor Address:</strong>
+                        </span>
+                        <t t-set="show_partner" t-value="True"/>
+                    </div>
+                    <div t-elif="o.picking_type_id.code=='internal' and o.partner_id">
+                        <span>
+                            <strong>Warehouse Address:</strong>
+                        </span>
+                        <t t-set="show_partner" t-value="True"/>
+                    </div>
+                    <div t-elif="o.picking_type_id.code=='outgoing' and o.partner_id and o.partner_id != o.partner_id.commercial_partner_id">
+                        <span>
+                            <strong>Customer Address:</strong>
+                        </span>
+                        <t t-set="show_partner" t-value="True"/>
+                    </div>
+                    <div t-if="show_partner" name="partner_header">
+
+                        <div t-field="o.partner_id.commercial_partner_id"
+                             t-options='{"widget": "contact", "fields": ["address", "name", "phone", "vat"], "no_marker": True, "phone_icons": True}'>
+                            <div class="bg-light border-1 rounded h-100 d-flex flex-column align-items-center justify-content-center p-4 opacity-75 text-muted text-center">
+                                <strong>Recipient address</strong>
+                                <div>Presence depends on the type of operation.</div>
+                            </div>
+                        </div>
+                    </div>-->
+                </div>
+                <div class="col-6" name="div_outgoing_address" style="color:#808080; padding-left: 8px;">
+                    <div t-if="o.should_print_delivery_address()">
+                        <!--                    <span>-->
+                        <!--                        <strong>Delivery Address:</strong>-->
+                        <!--                    </span>-->
+
+                        <div t-if="o.shipping_information_delivery == 'colette_premises'"> <!-- Si es Recoge en el local se muestra la dir de la compañía -->
+                            <div t-field="o.company_id.partner_id"
+                                 t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'>
+                                <div class="bg-light border-1 rounded h-100 d-flex flex-column align-items-center justify-content-center p-4 opacity-75 text-muted text-center">
+                                    <strong>Delivery address</strong>
+                                    <div>Presence depends on the type of operation.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div t-elif="o.shipping_information_delivery == 'agency' and o.shipping_information_agency == 'agency_office'"><!-- Si la entrega es Agencia y recoge en Oficina de agencia se pone la dir de la empresa de transporte-->
+                            <div t-field="o.shipping_information_transport_company_id"
+                                 t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'>
+                                <div class="bg-light border-1 rounded h-100 d-flex flex-column align-items-center justify-content-center p-4 opacity-75 text-muted text-center">
+                                    <strong>Delivery address</strong>
+                                    <div>Presence depends on the type of operation.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div t-else="" >
+                            <div t-field="o.move_ids[0].partner_id"
+                                 t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'>
+                                <div class="bg-light border-1 rounded h-100 d-flex flex-column align-items-center justify-content-center p-4 opacity-75 text-muted text-center">
+                                    <strong>Delivery address</strong>
+                                    <div>Presence depends on the type of operation.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div t-elif="o.picking_type_id.code != 'internal' and o.picking_type_id.warehouse_id.partner_id">
+                        <div t-if="o.shipping_information_delivery == 'colette_premises'"> <!-- Si es Recoge en el local se muestra la dir de la compañía -->
+                            <div t-field="o.company_id.partner_id"
+                                 t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'>
+                                <div class="bg-light border-1 rounded h-100 d-flex flex-column align-items-center justify-content-center p-4 opacity-75 text-muted text-center">
+                                    <strong>Delivery address</strong>
+                                    <div>Presence depends on the type of operation.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div t-elif="o.shipping_information_delivery == 'agency' and o.shipping_information_agency == 'agency_office'"><!-- Si la entrega es Agencia y recoge en Oficina de agencia se pone la dir de la empresa de transporte-->
+                            <div t-field="o.shipping_information_transport_company_id"
+                                 t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'>
+                                <div class="bg-light border-1 rounded h-100 d-flex flex-column align-items-center justify-content-center p-4 opacity-75 text-muted text-center">
+                                    <strong>Delivery address</strong>
+                                    <div>Presence depends on the type of operation.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div t-else="" >
+                            <span>
+                                <strong>Warehouse Address:</strong>
+                            </span>
+                            <div t-field="o.picking_type_id.warehouse_id.partner_id"
+                                 t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'>
+                                <div class="bg-light border-1 rounded h-100 d-flex flex-column align-items-center justify-content-center p-4 opacity-75 text-muted text-center">
+                                    <strong>Warehouse address</strong>
+                                    <div>Presence depends on the type of operation.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!--        </t>-->
+<!--        <t t-else="">-->
+<!--            <div class="row" style="padding: 8px 0 8px 8px; font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#595959;-->
+<!--        background:#f2f2f2; border-bottom: 1px solid #a7a9ac;">-->
+<!--                <div class="col-6">-->
+<!--                    <strong>DATOS DEL INICIO DEL TRASLADO</strong>-->
+<!--                </div>-->
+<!--                <div class="col-6">-->
+<!--                    <strong>DATOS DEL DESTINATARIO</strong>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="row" style="font-family: Calibri, Arial, sans-serif; font-size: 12px; padding-top: 5px;">-->
+<!--                <div class="col-2" style="padding-left: 8px; color:#595959;">-->
+<!--                    <strong>FECHA DE EMISIÓN:</strong>-->
+<!--                </div>-->
+<!--                <div class="col-4">-->
+<!--                </div>-->
+<!--                <div class="col-2" style="padding-left: 8px;">-->
+<!--                    <strong>DNI / RUC:</strong>-->
+<!--                </div>-->
+<!--                <div class="col-4">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="row" style="font-family: Calibri, Arial, sans-serif; font-size: 12px; padding-top: 5px;">-->
+<!--                <div class="col-2" style="padding-left:8px; color:#595959;">-->
+<!--                    <strong>FECHA DE INICIO DE TRASLADO:</strong>-->
+<!--                </div>-->
+<!--                <div class="col-4">-->
+<!--                </div>-->
+<!--                <div class="col-2" style="padding-left: 8px;">-->
+<!--                    <strong>RAZÓN SOCIAL:</strong>-->
+<!--                </div>-->
+<!--                <div class="col-4">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="row" style="font-family: Calibri, Arial, sans-serif; font-size: 12px;  padding-top: 5px;">-->
+<!--                <div class="col-2" style="padding-left: 8px; color:#595959;">-->
+<!--                    <strong>MOTIVO DE TRASLADO:</strong>-->
+<!--                </div>-->
+<!--                <div class="col-4">-->
+<!--                </div>-->
+<!--                <div class="col-2" style="padding-left: 8px; color:#292929;">-->
+<!--                    <strong>DOC. RELACIONADOS:</strong>-->
+<!--                </div>-->
+<!--                <div class="col-4">-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="row" style="padding: 8px 0 8px 8px; font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#595959;-->
+<!--        background:#f2f2f2; border-bottom: 1px solid #a7a9ac;">-->
+<!--                <div class="col-6">-->
+<!--                    <strong>DATOS DE PUNTO DE PARTIDA</strong>-->
+<!--                </div>-->
+<!--                <div class="col-6">-->
+<!--                    <strong>DATOS DE PUNTO DE LLEGADA</strong>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="row"-->
+<!--                 style="padding: 10px 0 10px 8px; font-family: Calibri, Arial, sans-serif; font-size: 12px; height: 50px;">-->
+<!--                <div class="col-6" name="div_incoming_address" style="color:#808080; padding-left: 8px;">-->
+<!--                    DIRECCIÓN:-->
+<!--                </div>-->
+<!--                <div class="col-6" name="div_outgoing_address" style="color:#808080; padding-left: 8px;">-->
+<!--                    DIRECCIÓN:-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </t>-->
+    </template>
+    <template id="report_after_header_stock_picking_wurfel">
+<!--        <t t-if="o.l10n_pe_edi_status == 'sent'">-->
+            <div class="row"
+                 style="padding: 8px 0 8px 8px; font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#3b3b3b;">
+                <div class="col-6">
+                    <strong>DATOS DEL INICIO DEL TRASLADO</strong>
+                </div>
+                <div class="col-6">
+                    <strong>DATOS DEL DESTINATARIO</strong>
+                </div>
+            </div>
+            <div class="row"
+                 style="font-family: Calibri, Arial, sans-serif; font-size: 12px; padding-top: 5px; color:#2c2b2b;">
+                <div class="col-2" style="padding-left: 8px;">
+                    <strong style="color:#898686;">FECHA DE EMISIÓN:</strong>
+                </div>
+                <div class="col-4">
+
+                    <span class="m-0"
+                          style="color:#808080; text-transform: uppercase; padding: 25px 8px 0 8px;"
+                          t-field="o.date"/>
+                </div>
+                <div class="col-2" style="padding-left: 8px;">
+                    <strong style="color:#898686;">DNI / RUC:</strong>
+                </div>
+                <div class="col-4">
+                    <span style="color:#808080; text-transform: uppercase; padding-left: 8px;" class="m-0">
+                        <t t-if="o.company_id.partner_id.vat">
+                            t-field="o.company_id.partner_id.vat"
+                        </t>
+                    </span>
+                </div>
+            </div>
+            <div class="row"
+                 style="font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#2c2b2b; padding-top: 5px;">
+                <div class="col-2" style="padding-left: 8px;">
+                    <strong style="color:#898686;">FECHA DE INICIO DE TRASLADO:</strong>
+                </div>
+                <div class="col-4">
+                    <span style="color:#808080; padding: 25px 8px 0 8px;" t-field="o.scheduled_date"/>
+                </div>
+                <div class="col-2" style="padding-left: 8px;">
+                    <strong style="color:#898686;">NOMBRE O RAZÓN SOCIAL:</strong>
+                </div>
+                <div class="col-4">
+                    <span style="color:#808080; padding: 25px 8px 0 8px;"
+                          t-field="o.company_id.partner_id.name"/>
+                </div>
+            </div>
+            <div class="row" style="font-family: Calibri, Arial, sans-serif; font-size: 12px; padding-top: 5px;">
+                <div class="col-2" style="padding-left: 8px;">
+                    <strong style="color:#898686;">MOTIVO DE TRASLADO:</strong>
+                </div>
+                <div class="col-4">
+                    <span style="color:#808080; text-transform: uppercase; padding: 25px 8px 0 8px;" class="m-0"
+                          t-field="o.note"></span>
+                </div>
+                <div class="col-2" style="padding-left: 8px;">
+                    <strong style="color:#898686;">DOC. RELACIONADOS:</strong>
+                </div>
+                <div class="col-4">
+                    <span style="color:#808080; text-transform: uppercase; padding: 25px 8px 0 8px;" class="m-0"
+                          t-field="o.origin"></span>
+                </div>
+            </div>
+            <div class="row"
+                 style="padding: 8px 0 8px 8px; font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#3b3b3b;">
+                <div class="col-6">
+                    <strong>DATOS DE PUNTO DE PARTIDA</strong>
+                </div>
+                <div class="col-6">
+                    <strong>DATOS DE PUNTO DE LLEGADA</strong>
+                </div>
+            </div>
+            <div class="row" style="font-family: Calibri, Arial, sans-serif; font-size: 12px;">
+                <div class="col-6" name="div_incoming_address" style="color:#808080; padding-left: 8px;">
+                    <t t-set="show_partner" t-value="False"/>
+                    <div t-field="o.company_id.partner_id"
+                         t-options='{"widget": "contact", "fields": ["address", "name", "phone", "vat"], "no_marker": True, "phone_icons": True}'>
+                        <div class="bg-light border-1 rounded h-100 d-flex flex-column align-items-center justify-content-center p-4 opacity-75 text-muted text-center">
+                            <strong>Recipient address</strong>
+                            <div>Presence depends on the type of operation.</div>
+                        </div>
+                    </div>
+                    <!--<t t-set="show_partner" t-value="False"/>
+                    <div t-if="o.picking_type_id.code=='incoming' and o.partner_id">
+                        <span>
+                            <strong>Vendor Address:</strong>
+                        </span>
+                        <t t-set="show_partner" t-value="True"/>
+                    </div>
+                    <div t-elif="o.picking_type_id.code=='internal' and o.partner_id">
+                        <span>
+                            <strong>Warehouse Address:</strong>
+                        </span>
+                        <t t-set="show_partner" t-value="True"/>
+                    </div>
+                    <div t-elif="o.picking_type_id.code=='outgoing' and o.partner_id and o.partner_id != o.partner_id.commercial_partner_id">
+                        <span>
+                            <strong>Customer Address:</strong>
+                        </span>
+                        <t t-set="show_partner" t-value="True"/>
+                    </div>
+                    <div t-if="show_partner" name="partner_header">
+                        <div t-field="o.partner_id.commercial_partner_id"
+                             t-options='{"widget": "contact", "fields": ["address", "name", "phone", "vat"], "no_marker": True, "phone_icons": True}'>
+                            <div class="bg-light border-1 rounded h-100 d-flex flex-column align-items-center justify-content-center p-4 opacity-75 text-muted text-center">
+                                <strong>Recipient address</strong>
+                                <div>Presence depends on the type of operation.</div>
+                            </div>
+                        </div>
+                    </div>-->
+                </div>
+                <div class="col-6" name="div_outgoing_address" style="color:#808080; padding-left: 8px;">
+                    <div t-if="o.should_print_delivery_address()">
+                        <!--                    <span>-->
+                        <!--                        <strong>Delivery Address:</strong>-->
+                        <!--                    </span>-->
+
+                        <div t-if="o.shipping_information_delivery == 'colette_premises'"> <!-- Si es Recoge en el local se muestra la dir de la compañía -->
+                            <div t-field="o.company_id.partner_id"
+                                 t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'>
+                                <div class="bg-light border-1 rounded h-100 d-flex flex-column align-items-center justify-content-center p-4 opacity-75 text-muted text-center">
+                                    <strong>Delivery address</strong>
+                                    <div>Presence depends on the type of operation.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div t-elif="o.shipping_information_delivery == 'agency' and o.shipping_information_agency == 'agency_office'"><!-- Si la entrega es Agencia y recoge en Oficina de agencia se pone la dir de la empresa de transporte-->
+                            <div t-field="o.shipping_information_transport_company_id"
+                                 t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'>
+                                <div class="bg-light border-1 rounded h-100 d-flex flex-column align-items-center justify-content-center p-4 opacity-75 text-muted text-center">
+                                    <strong>Delivery address</strong>
+                                    <div>Presence depends on the type of operation.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div t-else="" >
+                            <div t-field="o.move_ids[0].partner_id"
+                                 t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'>
+                                <div class="bg-light border-1 rounded h-100 d-flex flex-column align-items-center justify-content-center p-4 opacity-75 text-muted text-center">
+                                    <strong>Delivery address</strong>
+                                    <div>Presence depends on the type of operation.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div t-elif="o.picking_type_id.code != 'internal' and o.picking_type_id.warehouse_id.partner_id">
+                        <div t-if="o.shipping_information_delivery == 'colette_premises'"> <!-- Si es Recoge en el local se muestra la dir de la compañía -->
+                            <div t-field="o.company_id.partner_id"
+                                 t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'>
+                                <div class="bg-light border-1 rounded h-100 d-flex flex-column align-items-center justify-content-center p-4 opacity-75 text-muted text-center">
+                                    <strong>Delivery address</strong>
+                                    <div>Presence depends on the type of operation.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div t-elif="o.shipping_information_delivery == 'agency' and o.shipping_information_agency == 'agency_office'"><!-- Si la entrega es Agencia y recoge en Oficina de agencia se pone la dir de la empresa de transporte-->
+                            <div t-field="o.shipping_information_transport_company_id"
+                                 t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'>
+                                <div class="bg-light border-1 rounded h-100 d-flex flex-column align-items-center justify-content-center p-4 opacity-75 text-muted text-center">
+                                    <strong>Delivery address</strong>
+                                    <div>Presence depends on the type of operation.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div t-else="" >
+                            <span>
+                                <strong>Warehouse Address:</strong>
+                            </span>
+                            <div t-field="o.picking_type_id.warehouse_id.partner_id"
+                                 t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'>
+                                <div class="bg-light border-1 rounded h-100 d-flex flex-column align-items-center justify-content-center p-4 opacity-75 text-muted text-center">
+                                    <strong>Warehouse address</strong>
+                                    <div>Presence depends on the type of operation.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--<div t-if="o.should_print_delivery_address()">
+                        <span>
+                            <strong>Delivery Address:</strong>
+                        </span>
+                        <div t-field="o.move_ids[0].partner_id"
+                             t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'>
+                            <div class="bg-light border-1 rounded h-100 d-flex flex-column align-items-center justify-content-center p-4 opacity-75 text-muted text-center">
+                                <strong>Delivery address</strong>
+                                <div>Presence depends on the type of operation.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div t-elif="o.picking_type_id.code != 'internal' and o.picking_type_id.warehouse_id.partner_id">
+                        <span>
+                            <strong>Warehouse Address:</strong>
+                        </span>
+                        <div t-field="o.picking_type_id.warehouse_id.partner_id"
+                             t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'>
+                            <div class="bg-light border-1 rounded h-100 d-flex flex-column align-items-center justify-content-center p-4 opacity-75 text-muted text-center">
+                                <strong>Warehouse address</strong>
+                                <div>Presence depends on the type of operation.</div>
+                            </div>
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+<!--        </t>-->
+<!--        <t t-else="">-->
+<!--            <div class="row"-->
+<!--                 style="padding: 8px 0 8px 8px; font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#3b3b3b;">-->
+<!--                <div class="col-6">-->
+<!--                    <strong>DATOS DEL INICIO DEL TRASLADO</strong>-->
+<!--                </div>-->
+<!--                <div class="col-6">-->
+<!--                    <strong>DATOS DEL DESTINATARIO</strong>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="row"-->
+<!--                 style="font-family: Calibri, Arial, sans-serif; font-size: 12px; padding-top: 5px; color:#2c2b2b;">-->
+<!--                <div class="col-2" style="padding-left: 8px;">-->
+<!--                    <strong style="color:#898686;">FECHA DE EMISIÓN:</strong>-->
+<!--                </div>-->
+<!--                <div class="col-4">-->
+<!--                </div>-->
+<!--                <div class="col-2" style="padding-left: 8px;">-->
+<!--                    <strong style="color:#898686;">DNI / RUC:</strong>-->
+<!--                </div>-->
+<!--                <div class="col-4">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="row"-->
+<!--                 style="font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#2c2b2b; padding-top: 5px;">-->
+<!--                <div class="col-2" style="padding-left: 8px;">-->
+<!--                    <strong style="color:#898686;">FECHA DE INICIO DE TRASLADO:</strong>-->
+<!--                </div>-->
+<!--                <div class="col-4">-->
+<!--                </div>-->
+<!--                <div class="col-2" style="padding-left: 8px;">-->
+<!--                    <strong style="color:#898686;">NOMBRE O RAZÓN SOCIAL:</strong>-->
+<!--                </div>-->
+<!--                <div class="col-4">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="row" style="font-family: Calibri, Arial, sans-serif; font-size: 12px; padding-top: 5px;">-->
+<!--                <div class="col-2" style="padding-left: 8px;">-->
+<!--                    <strong style="color:#898686;">MOTIVO DE TRASLADO:</strong>-->
+<!--                </div>-->
+<!--                <div class="col-4">-->
+<!--                </div>-->
+<!--                <div class="col-2" style="padding-left: 8px;">-->
+<!--                    <strong style="color:#898686;">DOC. RELACIONADOS:</strong>-->
+<!--                </div>-->
+<!--                <div class="col-4">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="row"-->
+<!--                 style="padding: 8px 0 8px 8px; font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#3b3b3b;">-->
+<!--                <div class="col-6">-->
+<!--                    <strong>DATOS DE PUNTO DE PARTIDA</strong>-->
+<!--                </div>-->
+<!--                <div class="col-6">-->
+<!--                    <strong>DATOS DE PUNTO DE LLEGADA</strong>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="row" style="font-family: Calibri, Arial, sans-serif; font-size: 12px; height: 50px;">-->
+<!--                <div class="col-6" name="div_incoming_address" style="color:#808080; padding-left: 8px;">-->
+<!--                    <t t-set="show_partner" t-value="False"/>-->
+<!--                    DIRECCIÓN-->
+<!--                </div>-->
+<!--                <div class="col-6" name="div_outgoing_address" style="color:#808080; padding-left: 8px;">-->
+<!--                    DIRECCIÓN-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </t>-->
+    </template>
+
+    <!--  Parte para listar los productos    -->
+    <template id="report_list_product_stock_picking_lft">
+<!--        <t t-if="o.l10n_pe_edi_status == 'sent'">-->
+            <table class="table table-sm table-borderless"
+                   style="padding-top: 25px;border-bottom: 1px solid #a7a9ac;">
+                <t t-set="has_barcode"
+                   t-value="any(move_line.product_id and move_line.product_id.sudo().barcode or move_line.package_id for move_line in o.move_line_ids)"/>
+                <t t-set="has_serial_number"
+                   t-value="any(move_line.lot_id or move_line.lot_name for move_line in o.move_line_ids)"
+                   groups="stock.group_production_lot"/>
+                <thead style="background:#d9d9d9; font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#595959;">
+                    <tr>
+                        <th class="text-start" name="th_item_product">
+                            <strong>ITEM</strong>
+                        </th>
+                        <th class="text-start" name="th_code_product">
+                            <strong>CÓDIGO</strong>
+                        </th>
+                        <th class="text-start" name="th_desc_product">
+                            <strong>DESCRIPCIÓN</strong>
+                        </th>
+                        <th class="text-start" name="th_um_product">
+                            <strong>U.M</strong>
+                        </th>
+                        <th>
+                            <strong>CANTIDAD</strong>
+                        </th>
+                        <!--                    <th name="th_from" t-if="o.picking_type_id.code != 'incoming'" align="left"-->
+                        <!--                        groups="stock.group_stock_multi_locations">-->
+                        <!--                        <strong>From</strong>-->
+                        <!--                    </th>-->
+                        <!--                    <th name="th_to" t-elif="o.picking_type_id.code != 'outgoing'"-->
+                        <!--                        groups="stock.group_stock_multi_locations">-->
+                        <!--                        <strong>To</strong>-->
+                        <!--                    </th>-->
+                        <!--                    <th name="th_serial_number" class="text-center" t-if="has_serial_number">-->
+                        <!--                        <strong>Lot/Serial Number</strong>-->
+                        <!--                    </th>-->
+                        <!--                    <th name="th_barcode" class="text-center" t-if="has_barcode">-->
+                        <!--                        <strong>Product Barcode</strong>-->
+                        <!--                    </th>-->
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- In case you come across duplicated lines, ask NIM or LAP -->
+                    <t t-set="index" t-value="0"/>
+                    <t t-set="cnt" t-value="len(o.move_line_ids_without_package)"/>
+                    <t t-if="cnt > 9">
+                        <t t-set="remaining_rows" t-value="18 - cnt"/>
+                    </t>
+                    <t t-else="">
+                        <t t-set="remaining_rows" t-value="9 - cnt"/>
+                    </t>
+                    <tr t-foreach="o.move_line_ids_without_package" t-as="ml"
+                        t-if="o.move_line_ids and o.move_ids_without_package">
+                        <t t-set="index" t-value="index + 1"/>
+                        <t t-if="index % 2 == 0">
+                            <tr style="background-color: #f2f2f2; font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#2c2b2b;">
+                                <t t-call="l10n_pe_lft_report.line_product_stock_picking_lft"/>
+                            </tr>
+                        </t>
+                        <t t-else="">
+                            <tr style="font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#2c2b2b;">
+                                <t t-call="l10n_pe_lft_report.line_product_stock_picking_lft"/>
+                            </tr>
+                        </t>
+
+                    </tr>
+                    <!-- Extra empty rows -->
+                    <t t-foreach="range(remaining_rows)" t-as="i">
+                        <t t-set="index" t-value="index + 1"/>
+                        <t t-set="is_even" t-value="index % 2 == 0"/>
+                        <div>
+                            <tr t-att-style="is_even and 'background-color: #f2f2f2; height: 30px;' or 'background-color: #ffffff; height: 30px;'">
+                                <td colspan="5"></td>
+                            </tr>
+                        </div>
+                    </t>
+                </tbody>
+            </table>
+<!--        </t>-->
+<!--        <t t-else="">-->
+<!--            <table class="table table-sm table-borderless"-->
+<!--                   style="padding-top: 25px;border-bottom: 1px solid #a7a9ac;">-->
+<!--                <t t-set="has_barcode"-->
+<!--                   t-value="any(move_line.product_id and move_line.product_id.sudo().barcode or move_line.package_id for move_line in o.move_line_ids)"/>-->
+<!--                <t t-set="has_serial_number"-->
+<!--                   t-value="any(move_line.lot_id or move_line.lot_name for move_line in o.move_line_ids)"-->
+<!--                   groups="stock.group_production_lot"/>-->
+<!--                <thead style="background:#d9d9d9; font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#595959;">-->
+<!--                    <tr>-->
+<!--                        <th class="text-start" name="th_item_product">-->
+<!--                            <strong>ITEM</strong>-->
+<!--                        </th>-->
+<!--                        <th class="text-start" name="th_code_product">-->
+<!--                            <strong>CÓDIGO</strong>-->
+<!--                        </th>-->
+<!--                        <th class="text-start" name="th_desc_product">-->
+<!--                            <strong>DESCRIPCIÓN</strong>-->
+<!--                        </th>-->
+<!--                        <th class="text-start" name="th_um_product">-->
+<!--                            <strong>U.M</strong>-->
+<!--                        </th>-->
+<!--                        <th>-->
+<!--                            <strong>CANTIDAD</strong>-->
+<!--                        </th>-->
+<!--                        &lt;!&ndash;                    <th name="th_from" t-if="o.picking_type_id.code != 'incoming'" align="left"&ndash;&gt;-->
+<!--                        &lt;!&ndash;                        groups="stock.group_stock_multi_locations">&ndash;&gt;-->
+<!--                        &lt;!&ndash;                        <strong>From</strong>&ndash;&gt;-->
+<!--                        &lt;!&ndash;                    </th>&ndash;&gt;-->
+<!--                        &lt;!&ndash;                    <th name="th_to" t-elif="o.picking_type_id.code != 'outgoing'"&ndash;&gt;-->
+<!--                        &lt;!&ndash;                        groups="stock.group_stock_multi_locations">&ndash;&gt;-->
+<!--                        &lt;!&ndash;                        <strong>To</strong>&ndash;&gt;-->
+<!--                        &lt;!&ndash;                    </th>&ndash;&gt;-->
+<!--                        &lt;!&ndash;                    <th name="th_serial_number" class="text-center" t-if="has_serial_number">&ndash;&gt;-->
+<!--                        &lt;!&ndash;                        <strong>Lot/Serial Number</strong>&ndash;&gt;-->
+<!--                        &lt;!&ndash;                    </th>&ndash;&gt;-->
+<!--                        &lt;!&ndash;                    <th name="th_barcode" class="text-center" t-if="has_barcode">&ndash;&gt;-->
+<!--                        &lt;!&ndash;                        <strong>Product Barcode</strong>&ndash;&gt;-->
+<!--                        &lt;!&ndash;                    </th>&ndash;&gt;-->
+<!--                    </tr>-->
+<!--                </thead>-->
+<!--                <tbody>-->
+<!--                    &lt;!&ndash; In case you come across duplicated lines, ask NIM or LAP &ndash;&gt;-->
+<!--                    <t t-set="index" t-value="0"/>-->
+<!--                    <t t-set="remaining_rows" t-value="9"/>-->
+<!--                    &lt;!&ndash; Extra empty rows &ndash;&gt;-->
+<!--                    <t t-foreach="range(remaining_rows)" t-as="i">-->
+<!--                        <t t-set="index" t-value="index + 1"/>-->
+<!--                        <t t-set="is_even" t-value="index % 2 == 0"/>-->
+<!--                        <div>-->
+<!--                            <tr t-att-style="is_even and 'background-color: #f2f2f2; height: 30px;' or 'background-color: #ffffff; height: 30px;'">-->
+<!--                                <td colspan="5"></td>-->
+<!--                            </tr>-->
+<!--                        </div>-->
+<!--                    </t>-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </t>-->
+    </template>
+    <template id="line_product_stock_picking_lft">
+        <td>
+            <span>
+                <t t-esc="index"/>
+            </span>
+        </td>
+        <td>
+            <span t-field="ml.product_id.code">Customizable Desk</span>
+        </td>
+        <td>
+            <span t-field="ml.product_id.name">Customizable Desk</span>
+        </td>
+        <td>
+            <span t-field="ml.product_uom_id" groups="uom.group_uom">units</span>
+        </td>
+        <td class="text-center">
+            <span t-field="ml.quantity">3.00</span>
+            <!--                        <span t-field="ml.product_uom_id" groups="uom.group_uom">units</span>-->
+            <span t-if="ml.move_id.product_packaging_id">
+                <span t-if="o.state != 'done'">
+                    (
+                    <span t-field="ml.product_packaging_qty"
+                          t-options='{"widget": "integer"}'/>
+                    <span t-field="ml.move_id.product_packaging_id.name"/>)
+                </span>
+                <span t-if="o.state == 'done'">
+                    (
+                    <span t-field="ml.product_packaging_quantity"
+                          t-options='{"widget": "integer"}'/>
+                    <span t-field="ml.move_id.product_packaging_id.name"/>)
+                </span>
+            </span>
+        </td>
+
+    </template>
+    <template id="report_list_product_stock_picking_wurfel">
+<!--        <t t-if="o.l10n_pe_edi_status == 'sent'">-->
+            <div class="row" style="padding-top:10px;">
+                <table class="table table-sm table-borderless"
+                       style="border: 1px solid #a7a9ac;">
+                    <t t-set="has_barcode"
+                       t-value="any(move_line.product_id and move_line.product_id.sudo().barcode or move_line.package_id for move_line in o.move_line_ids)"/>
+                    <t t-set="has_serial_number"
+                       t-value="any(move_line.lot_id or move_line.lot_name for move_line in o.move_line_ids)"
+                       groups="stock.group_production_lot"/>
+                    <thead style="background:#d1d3d4; border: 1px solid #a7a9ac; font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#2c2b2b;">
+                        <tr>
+                            <th class="text-start" name="th_code_item"
+                                style="border: 1px solid  #a7a9ac; color:#3b3b3b;">
+                                <strong>ITEM</strong>
+                            </th>
+                            <th class="text-start" name="th_code_product"
+                                style="border: 1px solid  #a7a9ac; color:#3b3b3b;">
+                                <strong>CÓDIGO</strong>
+                            </th>
+                            <th class="text-start" name="th_desc_product"
+                                style="border: 1px solid  #a7a9ac; color:#3b3b3b;">
+                                <strong>DESCRIPCIÓN</strong>
+                            </th>
+                            <th class="text-start" name="th_um_product"
+                                style="border: 1px solid  #a7a9ac; color:#3b3b3b;">
+                                <strong>U.M</strong>
+                            </th>
+                            <th style="border: 1px solid  #a7a9ac; color:#3b3b3b;">
+                                <strong>CANTIDAD</strong>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody style="font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#2c2b2b;">
+                        <!-- In case you come across duplicated lines, ask NIM or LAP -->
+                        <t t-set="index" t-value="0"/>
+                        <t t-set="cnt" t-value="len(o.move_line_ids_without_package)"/>
+                        <t t-if="cnt > 12">
+                            <t t-set="remaining_rows" t-value="24 - cnt"/>
+                        </t>
+                        <t t-else="">
+                            <t t-set="remaining_rows" t-value="12 - cnt"/>
+                        </t>
+                        <tr t-foreach="o.move_line_ids_without_package" t-as="ml"
+                            t-if="o.move_line_ids and o.move_ids_without_package">
+                            <t t-set="index" t-value="index + 1"/>
+                            <td>
+                                <span>
+                                    <t t-esc="index"/>
+                                </span>
+                            </td>
+                            <td>
+                                <span t-field="ml.product_id.code">Code Desk</span>
+                            </td>
+                            <td>
+                                <span t-field="ml.product_id.name">Customizable Desk</span>
+                            </td>
+                            <td>
+                                <span t-field="ml.product_uom_id" groups="uom.group_uom">units</span>
+                            </td>
+                            <td class="text-center" style="border-right: 1px solid #a7a9ac;">
+                                <span t-field="ml.quantity">3.00</span>
+                                <!--                        <span t-field="ml.product_uom_id" groups="uom.group_uom">units</span>-->
+                                <span t-if="ml.move_id.product_packaging_id">
+                                    <span t-if="o.state != 'done'">
+                                        (
+                                        <span t-field="ml.product_packaging_qty"
+                                              t-options='{"widget": "integer"}'/>
+                                        <span t-field="ml.move_id.product_packaging_id.name"/>)
+                                    </span>
+                                    <span t-if="o.state == 'done'">
+                                        (
+                                        <span t-field="ml.product_packaging_quantity"
+                                              t-options='{"widget": "integer"}'/>
+                                        <span t-field="ml.move_id.product_packaging_id.name"/>)
+                                    </span>
+                                </span>
+                            </td>
+                        </tr>
+                        <t t-foreach="range(remaining_rows)" t-as="i">
+                            <tr style="height: 30px;">
+                                <td style="border-right: 1px solid #a7a9ac;" colspan="5"></td>
+                            </tr>
+                            <t t-set="index" t-value="index + 1"/>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+<!--        </t>-->
+<!--        <t t-else="">-->
+<!--            <div class="row" style="padding-top:10px;">-->
+<!--                <table class="table table-sm table-borderless"-->
+<!--                       style="border: 1px solid #a7a9ac;">-->
+<!--                    <t t-set="has_barcode"-->
+<!--                       t-value="any(move_line.product_id and move_line.product_id.sudo().barcode or move_line.package_id for move_line in o.move_line_ids)"/>-->
+<!--                    <t t-set="has_serial_number"-->
+<!--                       t-value="any(move_line.lot_id or move_line.lot_name for move_line in o.move_line_ids)"-->
+<!--                       groups="stock.group_production_lot"/>-->
+<!--                    <thead style="background:#d1d3d4; border: 1px solid #a7a9ac; font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#2c2b2b;">-->
+<!--                        <tr>-->
+<!--                            <th class="text-start" name="th_code_item"-->
+<!--                                style="border: 1px solid  #a7a9ac; color:#3b3b3b;">-->
+<!--                                <strong>ITEM</strong>-->
+<!--                            </th>-->
+<!--                            <th class="text-start" name="th_code_product"-->
+<!--                                style="border: 1px solid  #a7a9ac; color:#3b3b3b;">-->
+<!--                                <strong>CÓDIGO</strong>-->
+<!--                            </th>-->
+<!--                            <th class="text-start" name="th_desc_product"-->
+<!--                                style="border: 1px solid  #a7a9ac; color:#3b3b3b;">-->
+<!--                                <strong>DESCRIPCIÓN</strong>-->
+<!--                            </th>-->
+<!--                            <th class="text-start" name="th_um_product"-->
+<!--                                style="border: 1px solid  #a7a9ac; color:#3b3b3b;">-->
+<!--                                <strong>U.M</strong>-->
+<!--                            </th>-->
+<!--                            <th style="border: 1px solid  #a7a9ac; color:#3b3b3b;">-->
+<!--                                <strong>CANTIDAD</strong>-->
+<!--                            </th>-->
+<!--                        </tr>-->
+<!--                    </thead>-->
+<!--                    <tbody style="font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#2c2b2b;">-->
+<!--                        &lt;!&ndash; In case you come across duplicated lines, ask NIM or LAP &ndash;&gt;-->
+<!--                        <t t-set="index" t-value="0"/>-->
+<!--                        <t t-set="remaining_rows" t-value="12"/>-->
+<!--                        <t t-foreach="range(remaining_rows)" t-as="i">-->
+<!--                            <tr style="height: 30px;">-->
+<!--                                <td style="border-right: 1px solid #a7a9ac;" colspan="5"></td>-->
+<!--                            </tr>-->
+<!--                            <t t-set="index" t-value="index + 1"/>-->
+<!--                        </t>-->
+<!--                    </tbody>-->
+<!--                </table>-->
+<!--            </div>-->
+<!--        </t>-->
+    </template>
+    <!--   Otros datos -->
+    <template id="report_information_stock_picking_lft">
+<!--        <t t-if="o.l10n_pe_edi_status == 'sent'">-->
+            <div class="row" style="page-break-inside: avoid;">
+                <div class="col-auto col-8 mw-100 mb-2"
+                     style="font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#595959;">
+                    <strong style="padding: 25px 8px 0 8px;">UNIDAD DE MEDIDA DEL PESO BRUTO:</strong>
+                    <span style="color:#808080; text-transform: uppercase;" class="m-0" t-field="o.weight"></span>
+                    <br/>
+                    <strong style="padding: 25px 8px 0 8px;">PESO BRUTO DEL TOTAL DE LA CARGA:</strong>
+                    <span style="color:#808080;" t-field="o.weight_uom_name"/>
+                    <br/>
+                </div>
+                <div class="col-auto col-4 mw-100 mb-2"
+                     style="font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#2c2b2b;">
+                    <strong style="padding: 25px 8px 0 8px;"></strong>
+                    <br/>
+                    <strong style="padding: 25px 8px 0 8px;">MOTIVO DE TRASLADO:</strong>
+                    <!--            Se debe poner un if -->
+                    <span style="color:#808080; text-transform: uppercase;" class="m-0"
+                          t-field="o.l10n_pe_edi_reason_for_transfer"/>
+                    <br/>
+                </div>
+            </div>
+            <div style="page-break-inside: avoid;">
+                <div style="padding: 8px 0px 0 8px; background:#f2f2f2; height: 30px;
+        font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#2c2b2b; border-bottom: 1px solid #595959;"
+                     class="row">
+                    <strong>DATOS DEL TRASLADO</strong>
+                </div>
+                <div style="font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#595959;">
+                    <div class="row" style="padding: 5px 0 0 8px;">
+                        <div class="col-auto col-8 mw-100">
+                            <strong>MOVILIDAD DEL TRASLADO:</strong>
+                        </div>
+                        <div class="col-auto col-4 mw-100">
+                            <span style="color:#808080; text-transform: uppercase;" class="m-0"
+                                  t-field="o.l10n_pe_edi_transport_type">
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row" style="padding: 5px 0 0 8px;">
+                        <div class="col-auto col-8 mw-100">
+                            <strong>INDICADOR DE TRANSBORDO PROGRAMADO:</strong>
+                        </div>
+                        <div class="col-auto col-4 mw-100">
+                            <!--                    <span style="color:#808080; text-transform: uppercase;" class="m-0" t-field="o.weight"></span>-->
+                        </div>
+                    </div>
+                    <div class="row" style="padding: 5px 0 0 8px;">
+                        <div class="col-auto col-8 mw-100">
+                            <strong>INDICADOR DE TRASLADO EN VEHÍCULO DE CATEGORÍA M1 O L:
+                            </strong>
+                        </div>
+                        <div class="col-auto col-4 mw-100">
+                            <!--                    <span style="color:#808080; text-transform: uppercase;" class="m-0" t-field="o.weight"></span>-->
+                        </div>
+                    </div>
+                    <div class="row" style="padding: 5px 0 0 8px;">
+                        <div class="col-auto col-8 mw-100">
+                            <strong>INDICADOR DE RETORNO DE VEHÍCULO CON ENVASES O EMBALAJES
+                                VACÍOS:
+                            </strong>
+                        </div>
+                        <div class="col-auto col-4 mw-100">
+                            <!--                    <span style="color:#808080; text-transform: uppercase;" class="m-0" t-field="o.weight"></span>-->
+                        </div>
+                    </div>
+                    <div class="row" style="padding: 5px 0 0 8px;">
+                        <div class="col-auto col-8 mw-100">
+                            <strong>INDICADOR PARA REGISTRAR VEHÍCULOS Y CONDUCTORES DEL
+                                TRANSPORTISTA:
+                            </strong>
+                        </div>
+                        <div class="col-auto col-4 mw-100">
+                            <!--                    <span style="color:#808080; text-transform: uppercase;" class="m-0" t-field="o.weight"></span>-->
+                        </div>
+                    </div>
+                </div>
+                <div style="padding: 8px 0px 0 8px; background:#f2f2f2; height: 30px; font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#2c2b2b;
+                border-bottom: 1px solid #a7a9ac;"
+                     class="row">
+                    <strong>DATOS DEL TRANSPORTISTA</strong>
+                </div>
+                <div class="row"
+                     style="padding: 5px 0 0 8px; font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#595959;">
+                    <div class="col-auto col-4 mw-100">
+                        <strong>RUC / DNI:</strong>
+                    </div>
+                    <div class="col-auto col-4 mw-100">
+                        <t t-if="o.carrier_id">
+                            <span style="color:#808080; text-transform: uppercase;" class="m-0"
+                                  t-field="o.shipping_information_document_number"></span>
+                        </t>
+                    </div>
+                    <div class="col-auto col-4 mw-100">
+                        <strong>CONDUCTOR:</strong>
+                    </div>
+                    <div class="col-auto col-4 mw-100">
+                    </div>
+                </div>
+                <div class="row"
+                     style="padding: 5px 0 0 8px; font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#595959;">
+                    <div class="col-auto col-4 mw-100">
+                        <strong>RAZÓN SOCIAL:</strong>
+                    </div>
+                    <div class="col-auto col-4 mw-100">
+                        <t t-if="o.carrier_id">
+                            <span style="color:#808080; text-transform: uppercase;" class="m-0"
+                                  t-field="o.shipping_information_name"></span>
+                        </t>
+                    </div>
+                    <div class="col-auto col-4 mw-100">
+                        <strong>NOMBRE DEL CONDUCTOR:</strong>
+                    </div>
+                    <div class="col-auto col-4 mw-100">
+                        <t t-if="o.l10n_pe_edi_transport_type in ['01', '02']">
+                            <span style="color:#808080; text-transform: uppercase;" class="m-0"
+                                  t-field="o.l10n_pe_edi_operator_id"></span>
+                        </t>
+                    </div>
+                </div>
+                <div class="row"
+                     style="padding: 5px 0 0 8px; font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#595959;">
+                    <div class="col-auto col-4 mw-100">
+                        <strong>N° DE PLACA:</strong>
+                    </div>
+                    <div class="col-auto col-4 mw-100">
+                        <t t-if="o.carrier_id">
+                            <span style="color:#808080; text-transform: uppercase;" class="m-0"
+                                  t-field="o.shipping_information_plate"></span>
+                        </t>
+                    </div>
+                    <div class="col-auto col-4 mw-100">
+                        <strong>LICENCIA DEL CONDUCTOR:</strong>
+                    </div>
+                    <div class="col-auto col-4 mw-100">
+                        <t t-if="o.l10n_pe_edi_operator_id">
+                            <span style="color:#808080; text-transform: uppercase;" class="m-0"
+                                  t-field="o.l10n_pe_edi_operator_id.l10n_pe_edi_operator_license"></span>
+                        </t>
+                    </div>
+                </div>
+            </div>
+<!--        </t>-->
+<!--        <t t-else="">-->
+<!--            <div class="row" style="page-break-inside: avoid;">-->
+<!--                <div class="col-auto col-8 mw-100 mb-2"-->
+<!--                     style="font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#595959;">-->
+<!--                    <strong style="padding: 25px 8px 0 8px;">UNIDAD DE MEDIDA DEL PESO BRUTO:</strong>-->
+
+<!--                    <br/>-->
+<!--                    <strong style="padding: 25px 8px 0 8px;">PESO BRUTO DEL TOTAL DE LA CARGA:</strong>-->
+
+<!--                    <br/>-->
+<!--                </div>-->
+<!--                <div class="col-auto col-4 mw-100 mb-2"-->
+<!--                     style="font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#2c2b2b;">-->
+
+<!--                    <br/>-->
+<!--                    <strong style="padding: 25px 8px 0 8px;">MOTIVO DE TRASLADO:</strong>-->
+<!--                    &lt;!&ndash;            Se debe poner un if &ndash;&gt;-->
+<!--                    <br/>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div style="page-break-inside: avoid;">-->
+<!--                <div style="padding: 8px 0px 0 8px; background:#f2f2f2; height: 30px;-->
+<!--        font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#2c2b2b; border-bottom: 1px solid #595959;"-->
+<!--                     class="row">-->
+<!--                    <strong>DATOS DEL TRASLADO</strong>-->
+<!--                </div>-->
+<!--                <div style="font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#595959;">-->
+<!--                    <div class="row" style="padding: 5px 0 0 8px;">-->
+<!--                        <div class="col-auto col-8 mw-100">-->
+<!--                            <strong>MOVILIDAD DEL TRASLADO:</strong>-->
+<!--                        </div>-->
+<!--                        <div class="col-auto col-4 mw-100">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="row" style="padding: 5px 0 0 8px;">-->
+<!--                        <div class="col-auto col-8 mw-100">-->
+<!--                            <strong>INDICADOR DE TRANSBORDO PROGRAMADO:</strong>-->
+<!--                        </div>-->
+<!--                        <div class="col-auto col-4 mw-100">-->
+
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="row" style="padding: 5px 0 0 8px;">-->
+<!--                        <div class="col-auto col-8 mw-100">-->
+<!--                            <strong>INDICADOR DE TRASLADO EN VEHÍCULO DE CATEGORÍA M1 O L:-->
+<!--                            </strong>-->
+<!--                        </div>-->
+<!--                        <div class="col-auto col-4 mw-100">-->
+
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="row" style="padding: 5px 0 0 8px;">-->
+<!--                        <div class="col-auto col-8 mw-100">-->
+<!--                            <strong>INDICADOR DE RETORNO DE VEHÍCULO CON ENVASES O EMBALAJES-->
+<!--                                VACÍOS:-->
+<!--                            </strong>-->
+<!--                        </div>-->
+<!--                        <div class="col-auto col-4 mw-100">-->
+
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="row" style="padding: 5px 0 0 8px;">-->
+<!--                        <div class="col-auto col-8 mw-100">-->
+<!--                            <strong>INDICADOR PARA REGISTRAR VEHÍCULOS Y CONDUCTORES DEL-->
+<!--                                TRANSPORTISTA:-->
+<!--                            </strong>-->
+<!--                        </div>-->
+<!--                        <div class="col-auto col-4 mw-100">-->
+
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div style="padding: 8px 0px 0 8px; background:#f2f2f2; height: 30px; font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#2c2b2b;-->
+<!--                border-bottom: 1px solid #a7a9ac;"-->
+<!--                     class="row">-->
+<!--                    <strong>DATOS DEL TRANSPORTISTA</strong>-->
+<!--                </div>-->
+<!--                <div class="row"-->
+<!--                     style="padding: 5px 0 0 8px; font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#595959;">-->
+<!--                    <div class="col-auto col-4 mw-100">-->
+<!--                        <strong>RUC / DNI:</strong>-->
+<!--                    </div>-->
+<!--                    <div class="col-auto col-4 mw-100">-->
+
+<!--                    </div>-->
+<!--                    <div class="col-auto col-4 mw-100">-->
+<!--                        <strong>CONDUCTOR:</strong>-->
+<!--                    </div>-->
+<!--                    <div class="col-auto col-4 mw-100">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="row"-->
+<!--                     style="padding: 5px 0 0 8px; font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#595959;">-->
+<!--                    <div class="col-auto col-4 mw-100">-->
+<!--                        <strong>RAZÓN SOCIAL:</strong>-->
+<!--                    </div>-->
+<!--                    <div class="col-auto col-4 mw-100">-->
+
+<!--                    </div>-->
+<!--                    <div class="col-auto col-4 mw-100">-->
+<!--                        <strong>NOMBRE DEL CONDUCTOR:</strong>-->
+<!--                    </div>-->
+<!--                    <div class="col-auto col-4 mw-100">-->
+
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="row"-->
+<!--                     style="padding: 5px 0 0 8px; font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#595959;">-->
+<!--                    <div class="col-auto col-4 mw-100">-->
+<!--                        <strong>N° DE PLACA:</strong>-->
+<!--                    </div>-->
+<!--                    <div class="col-auto col-4 mw-100">-->
+
+<!--                    </div>-->
+<!--                    <div class="col-auto col-4 mw-100">-->
+<!--                        <strong>LICENCIA DEL CONDUCTOR:</strong>-->
+<!--                    </div>-->
+<!--                    <div class="col-auto col-4 mw-100">-->
+
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </t>-->
+    </template>
+    <template id="report_information_stock_picking_wurfel">
+<!--        <t t-if="o.l10n_pe_edi_status == 'sent'">-->
+            <div class="row" style="font-family: Calibri, Arial, sans-serif; font-size: 12px;">
+                <div class="col-auto col-8 mw-100 mb-2">
+                    <br/>
+                    <strong style="padding: 20px 8px 0 8px; color:#898686;">UNIDAD DE MEDIDA DEL PESO BRUTO:</strong>
+                    <span style="color:#808080; text-transform: uppercase;" class="m-0" t-field="o.weight"></span>
+                    <br/>
+                    <strong style="padding: 10px 8px 0 8px; color:#898686;">PESO BRUTO DEL TOTAL DE LA CARGA:</strong>
+                    <span style="color:#808080;" t-field="o.weight_uom_name"/>
+                    <br/>
+                </div>
+                <div class="col-auto col-4 mw-100 mb-2">
+                    <br/>
+                    <strong style="padding: 20px 8px 0 8px;"></strong>
+                    <br/>
+                    <strong style="padding: 10px 8px 0 8px; color:#898686;">
+                        MOTIVO DE TRASLADO:
+                    </strong>
+                    <!--            Se debe poner un if -->
+                    <span style="color:#808080; text-transform: uppercase;" class="m-0"
+                          t-field="o.l10n_pe_edi_reason_for_transfer"/>
+                    <br/>
+                </div>
+            </div>
+            <div style="padding: 8px 0px 0 8px; height: 35px; font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#2c2b2b;"
+                 class="row">
+                <strong>DATOS DEL TRASLADO</strong>
+            </div>
+            <div style="font-family: Calibri, Arial, sans-serif; font-size: 12px;">
+                <div class="row" style="padding: 2px 0 0 8px;">
+                    <div class="col-auto col-3 mw-100">
+                        <strong style="color:#898686;">MODALIDAD DEL TRASLADO:</strong>
+                    </div>
+                    <div class="col-auto col-2 mw-100">
+                        <span style="color:#808080; text-transform: uppercase;" class="m-0"
+                              t-field="o.l10n_pe_edi_transport_type">
+                        </span>
+                    </div>
+                    <div class="col-auto col-6 mw-100">
+                        <strong style="color:#898686;">INDICADOR DE RETORNO DE VEHÍCULO CON ENVASES O EMBALAJES
+                            VACÍOS:
+                        </strong>
+                    </div>
+                    <div class="col-auto col-1 mw-100">
+                        <!--                    <span style="color:#808080; text-transform: uppercase;" class="m-0" t-field="o.weight"></span>-->
+                    </div>
+                </div>
+                <div class="row" style="padding: 2px 0 0 8px;">
+                    <div class="col-auto col-3 mw-100">
+                        <strong style="color:#898686;">INDICADOR DE TRANSBORDO PROGRAMADO:</strong>
+                    </div>
+                    <div class="col-auto col-2 mw-100">
+                        <!--                    <span style="color:#808080; text-transform: uppercase;" class="m-0" t-field="o.weight"></span>-->
+                    </div>
+                    <div class="col-auto col-6 mw-100">
+                        <strong style="color:#898686;">INDICADOR PARA REGISTRAR VEHÍCULOS Y CONDUCTORES DEL
+                            TRANSPORTISTA:
+                        </strong>
+                    </div>
+                    <div class="col-auto col-1 mw-100">
+                        <!--                    <span style="color:#808080; text-transform: uppercase;" class="m-0" t-field="o.weight"></span>-->
+                    </div>
+                </div>
+                <div class="row" style="padding: 2px 0 0 8px; color:#898686;">
+                    <div class="col-auto col-5 mw-100">
+                        <strong>INDICADOR DE TRASLADO EN VEHÍCULO DE CATEGORÍA M1 O L:
+                        </strong>
+                    </div>
+                    <div class="col-auto col-1 mw-100">
+                        <!--                    <span style="color:#808080; text-transform: uppercase;" class="m-0" t-field="o.weight"></span>-->
+                    </div>
+                </div>
+            </div>
+            <div style="padding: 8px 0px 0 8px; height: 35px; font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#2c2b2b;"
+                 class="row">
+                <strong>DATOS DEL TRANSPORTISTA</strong>
+            </div>
+            <div class="row" style="padding-left:8px; font-family: Calibri, Arial, sans-serif; font-size: 12px;">
+                <div class="col-auto col-4">
+                    <strong style="color:#898686">DNI / RUC:</strong>
+                </div>
+                <div class="col-auto col-4">
+                    <t t-if="o.carrier_id">
+                        <span style="color:#808080; text-transform: uppercase;" class="m-0"
+                              t-field="o.shipping_information_document_number"></span>
+                    </t>
+                </div>
+                <div class="col-auto col-4">
+                    <strong style="color:#898686">CONDUCTOR:</strong>
+                </div>
+                <div class="col-auto col-4">
+                </div>
+            </div>
+            <div class="row" style="padding-left:8px; font-family: Calibri, Arial, sans-serif; font-size: 12px;">
+                <div class="col-auto col-4">
+                    <strong style="color:#898686">NOMBRE O RAZÓN SOCIAL:</strong>
+                </div>
+                <div class="col-auto col-4">
+                    <t t-if="o.carrier_id">
+                        <span style="color:#808080; text-transform: uppercase;" class="m-0"
+                              t-field="o.shipping_information_name"></span>
+                    </t>
+                </div>
+                <div class="col-auto col-4">
+                    <strong style="color:#898686">NOMBRE DEL CONDUCTOR:</strong>
+                </div>
+                <div class="col-auto col-4">
+                    <t t-if="o.l10n_pe_edi_transport_type in ['01', '02']">
+                        <span style="color:#808080; text-transform: uppercase;" class="m-0"
+                              t-field="o.l10n_pe_edi_operator_id"></span>
+                    </t>
+                </div>
+            </div>
+            <div class="row" style="padding-left:8px; font-family: Calibri, Arial, sans-serif; font-size: 12px;">
+                <div class="col-auto col-4">
+                    <strong style="color:#898686">PLACA N°:</strong>
+                </div>
+                <div class="col-auto col-4">
+                    <t t-if="o.carrier_id">
+                        <span style="color:#808080; text-transform: uppercase;" class="m-0"
+                              t-field="o.shipping_information_plate">
+                        </span>
+                    </t>
+                </div>
+                <div class="col-auto col-4">
+                    <strong style="color:#898686">LICENCIA DEL CONDUCIR:</strong>
+                </div>
+                <div class="col-auto col-4">
+                    <t t-if="o.carrier_id">
+                        <span style="color:#808080; text-transform: uppercase;" class="m-0"
+                              t-field="o.l10n_pe_edi_operator_id.l10n_pe_edi_operator_license"></span>
+                    </t>
+                </div>
+            </div>
+<!--        </t>-->
+<!--        <t t-else="">-->
+<!--            <div class="row" style="font-family: Calibri, Arial, sans-serif; font-size: 12px;">-->
+<!--                <div class="col-auto col-8 mw-100 mb-2">-->
+<!--                    <br/>-->
+<!--                    <strong style="padding: 20px 8px 0 8px; color:#898686;">UNIDAD DE MEDIDA DEL PESO BRUTO:</strong>-->
+
+<!--                    <br/>-->
+<!--                    <strong style="padding: 10px 8px 0 8px; color:#898686;">PESO BRUTO DEL TOTAL DE LA CARGA:</strong>-->
+
+<!--                    <br/>-->
+<!--                </div>-->
+<!--                <div class="col-auto col-4 mw-100 mb-2">-->
+<!--                    <br/>-->
+<!--                    <strong style="padding: 20px 8px 0 8px;"></strong>-->
+<!--                    <br/>-->
+<!--                    <strong style="padding: 10px 8px 0 8px; color:#898686;">-->
+<!--                        MOTIVO DE TRASLADO:-->
+<!--                    </strong>-->
+
+<!--                    <br/>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div style="padding: 8px 0px 0 8px; height: 35px; font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#2c2b2b;"-->
+<!--                 class="row">-->
+<!--                <strong>DATOS DEL TRASLADO</strong>-->
+<!--            </div>-->
+<!--            <div style="font-family: Calibri, Arial, sans-serif; font-size: 12px;">-->
+<!--                <div class="row" style="padding: 2px 0 0 8px;">-->
+<!--                    <div class="col-auto col-3 mw-100">-->
+<!--                        <strong style="color:#898686;">MODALIDAD DEL TRASLADO:</strong>-->
+<!--                    </div>-->
+<!--                    <div class="col-auto col-2 mw-100">-->
+
+<!--                    </div>-->
+<!--                    <div class="col-auto col-6 mw-100">-->
+<!--                        <strong style="color:#898686;">INDICADOR DE RETORNO DE VEHÍCULO CON ENVASES O EMBALAJES-->
+<!--                            VACÍOS:-->
+<!--                        </strong>-->
+<!--                    </div>-->
+<!--                    <div class="col-auto col-1 mw-100">-->
+
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="row" style="padding: 2px 0 0 8px;">-->
+<!--                    <div class="col-auto col-3 mw-100">-->
+<!--                        <strong style="color:#898686;">INDICADOR DE TRANSBORDO PROGRAMADO:</strong>-->
+<!--                    </div>-->
+<!--                    <div class="col-auto col-2 mw-100">-->
+<!--                        &lt;!&ndash;                    <span style="color:#808080; text-transform: uppercase;" class="m-0" t-field="o.weight"></span>&ndash;&gt;-->
+<!--                    </div>-->
+<!--                    <div class="col-auto col-6 mw-100">-->
+<!--                        <strong style="color:#898686;">INDICADOR PARA REGISTRAR VEHÍCULOS Y CONDUCTORES DEL-->
+<!--                            TRANSPORTISTA:-->
+<!--                        </strong>-->
+<!--                    </div>-->
+<!--                    <div class="col-auto col-1 mw-100">-->
+
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="row" style="padding: 2px 0 0 8px; color:#898686;">-->
+<!--                    <div class="col-auto col-5 mw-100">-->
+<!--                        <strong>INDICADOR DE TRASLADO EN VEHÍCULO DE CATEGORÍA M1 O L:-->
+<!--                        </strong>-->
+<!--                    </div>-->
+<!--                    <div class="col-auto col-1 mw-100">-->
+
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div style="padding: 8px 0px 0 8px; height: 35px; font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#2c2b2b;"-->
+<!--                 class="row">-->
+<!--                <strong>DATOS DEL TRANSPORTISTA</strong>-->
+<!--            </div>-->
+<!--            <div class="row" style="padding-left:8px; font-family: Calibri, Arial, sans-serif; font-size: 12px;">-->
+<!--                <div class="col-auto col-4">-->
+<!--                    <strong style="color:#898686">DNI / RUC:</strong>-->
+<!--                </div>-->
+<!--                <div class="col-auto col-4">-->
+
+<!--                </div>-->
+<!--                <div class="col-auto col-4">-->
+<!--                    <strong style="color:#898686">CONDUCTOR:</strong>-->
+<!--                </div>-->
+<!--                <div class="col-auto col-4">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="row" style="padding-left:8px; font-family: Calibri, Arial, sans-serif; font-size: 12px;">-->
+<!--                <div class="col-auto col-4">-->
+<!--                    <strong style="color:#898686">NOMBRE O RAZÓN SOCIAL:</strong>-->
+<!--                </div>-->
+<!--                <div class="col-auto col-4">-->
+
+<!--                </div>-->
+<!--                <div class="col-auto col-4">-->
+<!--                    <strong style="color:#898686">NOMBRE DEL CONDUCTOR:</strong>-->
+<!--                </div>-->
+<!--                <div class="col-auto col-4">-->
+
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="row" style="padding-left:8px; font-family: Calibri, Arial, sans-serif; font-size: 12px;">-->
+<!--                <div class="col-auto col-4">-->
+<!--                    <strong style="color:#898686">PLACA N°:</strong>-->
+<!--                </div>-->
+<!--                <div class="col-auto col-4">-->
+
+<!--                </div>-->
+<!--                <div class="col-auto col-4">-->
+<!--                    <strong style="color:#898686">LICENCIA DEL CONDUCIR:</strong>-->
+<!--                </div>-->
+<!--                <div class="col-auto col-4">-->
+
+<!--                </div>-->
+<!--            </div>-->
+<!--        </t>-->
+    </template>
+
+    <template id="report_table_observ_stock_picking_lft">
+<!--        <t t-if="o.l10n_pe_edi_status == 'sent'">-->
+            <div id="total" class="clearfix row" style="padding-top:10px">
+                <div class="col-8 col-sm-5 col-md-6"
+                     style="background-color:#f2f2f2; height: 106px;">
+                    <table class="table table-sm table-borderless">
+                        <tr>
+                            <strong style="font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#595959;">
+                                OBSERVACIONES:
+                            </strong>
+                            <td style="height: 50px">
+                                <span class="m-0" t-field="o.note"></span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-4 col-sm-6 col-md-6">
+                    <t t-foreach="o.package_level_ids.sorted(key=lambda p: p.package_id.name)"
+                       t-as="package">
+                        <t t-set="package" t-value="package.with_context(picking_id=o.id)"/>
+                        <div t-field="package.package_id.name"
+                             t-options="{'widget': 'barcode', 'humanreadable': 1, 'width': 600, 'height': 100, 'img_style': 'width:300px;height:50px;margin-left: -50px;'}">
+                            <div class="bg-light border-1 rounded d-flex flex-column align-items-center justify-content-center px-1 py-2  opacity-75 text-muted text-center">
+                                (package barcode)
+                            </div>
+                        </div>
+                        <br/>
+                    </t>
+                </div>
+            </div>
+<!--        </t>-->
+<!--        <t t-else="">-->
+<!--            <div id="total" class="clearfix row" style="padding-top:10px">-->
+<!--                <div class="col-8 col-sm-5 col-md-6"-->
+<!--                     style="background-color:#f2f2f2; height: 106px;">-->
+<!--                    <table class="table table-sm table-borderless">-->
+<!--                        <tr>-->
+<!--                            <strong style="font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#595959;">-->
+<!--                                OBSERVACIONES:-->
+<!--                            </strong>-->
+<!--                            <td style="height: 50px">-->
+
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                    </table>-->
+<!--                </div>-->
+<!--                <div class="col-4">-->
+<!--                    &lt;!&ndash;                    <div>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                        <t t-set="contact_name"&ndash;&gt;-->
+<!--                    &lt;!&ndash;                           t-value="o._generate_qr_code()"/>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                        <div class="qrcode me-3" id="qrcode_image">&ndash;&gt;-->
+<!--                    &lt;!&ndash;                            <p t-if="contact_name"&ndash;&gt;-->
+<!--                    &lt;!&ndash;                               class="position-relative mb-0">&ndash;&gt;-->
+<!--                    &lt;!&ndash;                                <img t-att-src="image_data_uri(contact_name)"&ndash;&gt;-->
+<!--                    &lt;!&ndash;                                     style="height: 130px; width: 130px;"&ndash;&gt;-->
+<!--                    &lt;!&ndash;                                     alt="QR"/>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                            </p>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </t>-->
+    </template>
+    <template id="report_table_observ_stock_picking_wurfel">
+<!--        <t t-if="o.l10n_pe_edi_status == 'sent'">-->
+            <div id="total" class="clearfix row" style="padding-top:5px">
+                <div class="col-8 col-sm-5 col-md-6"
+                     style="border: 1px solid #a7a9ac; padding-left: 8px; height: 108px;">
+                    <table>
+                        <tr>
+                            <strong style="font-family: Calibri, Arial, sans-serif; font-size: 9px; color:#2c2b2b;">
+                                OBSERVACIONES:
+                            </strong>
+                            <td>
+                                <span class="m-0" t-field="o.note"></span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-4 col-sm-6 col-md-6">
+                    <t t-foreach="o.package_level_ids.sorted(key=lambda p: p.package_id.name)"
+                       t-as="package">
+                        <t t-set="package" t-value="package.with_context(picking_id=o.id)"/>
+                        <div t-field="package.package_id.name"
+                             t-options="{'widget': 'barcode', 'humanreadable': 1, 'width': 600, 'height': 100, 'img_style': 'width:300px;height:50px;margin-left: -50px;'}">
+                            <div class="bg-light border-1 rounded d-flex flex-column align-items-center justify-content-center px-1 py-2  opacity-75 text-muted text-center">
+                                (package barcode)
+                            </div>
+                        </div>
+                        <br/>
+                    </t>
+                </div>
+            </div>
+<!--        </t>-->
+<!--        <t t-else="">-->
+<!--            <div id="total" class="clearfix row" style="padding-top:5px">-->
+<!--                <div class="col-8 col-sm-5 col-md-6"-->
+<!--                     style="border: 1px solid #a7a9ac; padding-left: 8px; height: 108px;">-->
+<!--                    <table>-->
+<!--                        <tr>-->
+<!--                            <strong style="font-family: Calibri, Arial, sans-serif; font-size: 9px; color:#2c2b2b;">-->
+<!--                                OBSERVACIONES:-->
+<!--                            </strong>-->
+<!--                            <td>-->
+
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                    </table>-->
+<!--                </div>-->
+<!--                <div class="col-4">-->
+<!--                    &lt;!&ndash;                    <t t-set="contact_name"&ndash;&gt;-->
+<!--                    &lt;!&ndash;                       t-value="o._generate_qr_code()"/>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                    <div class="qrcode me-3" id="qrcode_image">&ndash;&gt;-->
+<!--                    &lt;!&ndash;                        <p t-if="contact_name"&ndash;&gt;-->
+<!--                    &lt;!&ndash;                           class="position-relative mb-0">&ndash;&gt;-->
+<!--                    &lt;!&ndash;                            <img t-att-src="image_data_uri(contact_name)"&ndash;&gt;-->
+<!--                    &lt;!&ndash;                                 style="height: 130px; width: 130px;"&ndash;&gt;-->
+<!--                    &lt;!&ndash;                                 alt="QR"/>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                        </p>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </t>-->
+    </template>
+</odoo>

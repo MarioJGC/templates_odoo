@@ -1,0 +1,3 @@
+---Models in module 'payment_culqi'---
+---Fields in module 'payment_culqi'---
+---XML records in module 'payment_culqi'---

@@ -1,0 +1,730 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!--    Parte derecha de stock picking-->
+    <template id="report_right_header_service_order_lft">
+        <div class="col-6">
+            <div class="row text-center" style="padding:10px 0 0 20px;">
+                <div style="background-color:#d9d9d9; display: flex;
+                justify-content: center; align-items: center; height:40px;">
+                    <strong style="font-family: Calibri, Arial, sans-serif; font-size: 17px; color:#595959; line-height: 40px;">
+                        <t t-if="o.type=='order_service'">
+                            ORDEN DE SERVICIO
+                        </t>
+                    </strong>
+                </div>
+            </div>
+            <div class="row" style="padding:10px 0 0 20px;">
+                <div class="col-5 text-end"
+                     style="background-color:#f2f2f2; height:30px; padding-right:60px;">
+                    <strong class="text-end"
+                            style="font-family: Calibri, Arial, sans-serif; font-size: 15px; color:#595959; line-height: 30px;">
+                        NUMERO O.S.
+                    </strong>
+                </div>
+                <div class="col-7" style="height:30px; padding-left:45px;">
+                    <strong style="font-family: Calibri, Arial, sans-serif; font-size: 15px; color:#595959; line-height: 30px;">
+                        <span class="m-0" t-esc="o.name">
+                        </span>
+                    </strong>
+                </div>
+            </div>
+            <div class="row" style="padding-left:20px;">
+                <div class="col-5 text-end"
+                     style="background-color:#f2f2f2; height:30px; padding-right:60px;">
+                    <strong class="text-end"
+                            style="font-family: Calibri, Arial, sans-serif; font-size: 15px; color:#595959; line-height: 30px;">
+                        FECHA
+                    </strong>
+                </div>
+                <div class="col-7" style="height:40px; padding-left:45px;">
+                    <strong style="font-family: Calibri, Arial, sans-serif; font-size: 15px; color:#595959; line-height: 40px;">
+                        <span class="m-0" t-esc="o.date_order.strftime('%d/%m/%Y')">
+                        </span>
+                    </strong>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template id="report_right_header_service_order_wurfel">
+        <div class="col-5 text-center">
+            <div class="row">
+                <div class="col-2"/>
+                <div class="col-10" style="justify-content: center; border: 1px solid #a7a9ac;">
+                    <div style="padding: 10px 8px 10px 8px;">
+                        <t t-if="o.type=='order_service'">
+                            <strong style="font-family: Calibri, Arial, sans-serif; font-size: 18px; color:#000000; line-height: 40px;">
+                                ORDEN DE SERVICIO
+                            </strong>
+                        </t>
+                        <div class="row">
+                            <div class="col-6 text-end">
+                                <span>NUMERO O.S:</span>
+                            </div>
+                            <div class="col-6 text-start" style="padding-left:10px;">
+                                <span class="m-0" t-esc="o.name"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 text-end">
+                                <span>FECHA:</span>
+                            </div>
+                            <div class="col-6 text-start" style="padding-left:10px;">
+                                <span class="m-0" t-esc="o.date_order.strftime('%d/%m/%Y')">
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!--  Parte de abajo de stock picking    -->
+    <template id="report_after_header_service_order_lft">
+        <div class="row" style="border-bottom: 1px solid #a7a9ac;"/>
+        <t t-if="o.type=='order_service'">
+            <div class="row" style="padding: 8px 0 8px 8px; font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#595959;
+        background:#d9d9d9; border-bottom: 1px solid #a7a9ac;">
+                <div class="col-6">
+                    <strong>PROVEEDOR</strong>
+                </div>
+                <div class="col-6">
+                    <strong>COMPRADOR</strong>
+                </div>
+            </div>
+            <div class="row"
+                 style="background:#f2f2f2; font-family: Calibri, Arial, sans-serif; font-size: 12px; padding-top: 5px;">
+                <div class="col-6" style="padding-left: 8px; color:#595959;">
+                    <strong>CONTACTO:</strong>
+                </div>
+                <div class="col-6" style="padding-left: 8px; color:#595959;">
+                    <strong>CONTACTO:</strong>
+                </div>
+            </div>
+            <div class="row"
+                 style="font-family: Calibri, Arial, sans-serif; font-size: 12px; padding-top: 5px; min-height: 25px;">
+                <div class="col-6">
+                    <span class="m-0"
+                          style="color:#595959; text-transform: uppercase; padding: 25px 8px 0 8px;"
+                          t-field="o.partner_id.main_contact"/>
+                </div>
+                <div class="col-6">
+                    <span style="color:#595959; text-transform: uppercase; padding-left: 8px;" class="m-0">
+                        <t t-if="o.company_id.partner_id">
+                            <span t-field="o.company_id.partner_id.main_contact"/>
+                        </t>
+                    </span>
+                </div>
+            </div>
+            <div class="row"
+                 style="background:#f2f2f2; font-family: Calibri, Arial, sans-serif; font-size: 12px; padding-top: 5px;">
+                <div class="col-6" style="padding-left:8px; color:#595959;">
+                    <strong>RUC:</strong>
+                </div>
+                <div class="col-6" style="padding-left: 8px; color:#595959;">
+                    <strong>RUC:</strong>
+                </div>
+            </div>
+            <div class="row"
+                 style="font-family: Calibri, Arial, sans-serif; font-size: 12px; padding-top: 5px; min-height: 25px;">
+                <div class="col-6">
+                    <t t-if="o.partner_id.l10n_latam_identification_type_id">
+                        <span style="color:#595959; padding: 25px 8px 0 8px;"
+                              t-field="o.partner_id.vat"/>
+                    </t>
+                </div>
+                <div class="col-6">
+                    <t t-if="o.partner_id.l10n_latam_identification_type_id">
+                        <span style="color:#595959; padding: 25px 8px 0 8px;"
+                              t-field="o.company_id.partner_id.vat"/>
+                    </t>
+                </div>
+            </div>
+            <div class="row"
+                 style="background:#f2f2f2; font-family: Calibri, Arial, sans-serif; font-size: 12px;  padding-top: 5px;">
+                <div class="col-6" style="padding-left: 8px; color:#595959;">
+                    <strong>RAZON SOCIAL:</strong>
+                </div>
+                <div class="col-6" style="padding-left: 8px; color:#595959;">
+                    <strong>RAZON SOCIAL:</strong>
+                </div>
+            </div>
+            <div class="row"
+                 style="font-family: Calibri, Arial, sans-serif; font-size: 12px;  padding-top: 5px; min-height: 25px;">
+                <div class="col-6">
+                    <span style="color:#595959; text-transform: uppercase; padding: 25px 8px 0 8px;" class="m-0"
+                          t-field="o.partner_id.name"></span>
+                </div>
+                <div class="col-6">
+                    <span style="color:#595959; text-transform: uppercase; padding: 25px 8px 0 8px;" class="m-0"
+                          t-field="o.company_id.partner_id.name"></span>
+                </div>
+            </div>
+            <div class="row"
+                 style="background:#f2f2f2; font-family: Calibri, Arial, sans-serif; font-size: 12px;  padding-top: 5px;">
+                <div class="col-6" style="padding-left: 8px; color:#595959;">
+                    <strong>DIRECCIÓN:</strong>
+                </div>
+                <div class="col-6" style="padding-left: 8px; color:#595959;">
+                    <strong>DIRECCIÓN:</strong>
+                </div>
+            </div>
+            <div class="row"
+                 style="font-family: Calibri, Arial, sans-serif; font-size: 12px;  padding-top: 5px; min-height: 25px;">
+                <div class="col-6">
+                    <span style="color:#595959; text-transform: uppercase; padding: 25px 8px 0 8px;" class="m-0"
+                          t-field="o.partner_id.street"></span>-
+                    <span style="color:#595959; text-transform: uppercase; padding: 25px 8px 0 8px;" class="m-0"
+                          t-field="o.partner_id.city"></span>-
+                    <span style="color:#595959; text-transform: uppercase; padding: 25px 8px 0 8px;" class="m-0"
+                          t-field="o.partner_id.state_id"></span>-
+                    <span style="color:#595959; text-transform: uppercase; padding: 25px 8px 0 8px;" class="m-0"
+                          t-field="o.partner_id.country_id"></span>
+
+                </div>
+                <div class="col-6">
+                    <span style="color:#595959; text-transform: uppercase; padding: 25px 8px 0 8px;" class="m-0"
+                          t-field="o.company_id.partner_id.street"></span>-
+                    <span style="color:#595959; text-transform: uppercase; padding: 25px 8px 0 8px;" class="m-0"
+                          t-field="o.company_id.partner_id.city"></span>-
+                    <span style="color:#595959; text-transform: uppercase; padding: 25px 8px 0 8px;" class="m-0"
+                          t-field="o.company_id.partner_id.state_id"></span>-
+                    <span style="color:#595959; text-transform: uppercase; padding: 25px 8px 0 8px;" class="m-0"
+                          t-field="o.company_id.partner_id.country_id"></span>
+                </div>
+            </div>
+            <div class="row"
+                 style="background:#f2f2f2; font-family: Calibri, Arial, sans-serif; font-size: 12px;  padding-top: 5px;">
+                <div class="col-6" style="padding-left: 8px; color:#595959;">
+                    <strong>TELÉFONO:</strong>
+                </div>
+                <div class="col-6" style="padding-left: 8px; color:#595959;">
+                    <strong>TELÉFONO:</strong>
+                </div>
+            </div>
+            <div class="row"
+                 style="font-family: Calibri, Arial, sans-serif; font-size: 12px;  padding-top: 5px; min-height: 25px;">
+                <div class="col-6">
+                    <span style="color:#595959; text-transform: uppercase; padding: 25px 8px 0 8px;" class="m-0"
+                          t-field="o.partner_id.phone"></span>
+                </div>
+                <div class="col-6">
+                    <span style="color:#595959; text-transform: uppercase; padding: 25px 8px 0 8px;" class="m-0"
+                          t-field="o.company_id.partner_id.phone"></span>
+                </div>
+            </div>
+            <div class="row"
+                 style="background:#f2f2f2; font-family: Calibri, Arial, sans-serif; font-size: 12px;  padding-top: 5px;">
+                <div class="col-6" style="padding-left: 8px; color:#595959;">
+                    <strong>EMAIL:</strong>
+                </div>
+                <div class="col-6" style="padding-left: 8px; color:#595959;">
+                    <strong>EMAIL:</strong>
+                </div>
+            </div>
+            <div class="row"
+                 style="font-family: Calibri, Arial, sans-serif; font-size: 12px;  padding-top: 5px; min-height: 25px;">
+                <div class="col-6">
+                    <span style="color:#595959; text-transform: uppercase; padding: 25px 8px 0 8px;" class="m-0"
+                          t-field="o.partner_id.email"></span>
+                </div>
+                <div class="col-6">
+                    <span style="color:#595959; text-transform: uppercase; padding: 25px 8px 0 8px;" class="m-0"
+                          t-field="o.company_id.partner_id.email"></span>
+                </div>
+            </div>
+            <div class="row" style="border-bottom: 1px solid #a7a9ac; padding-top: 5px;"/>
+            <div class="row" style="padding: 8px 0 8px 8px; font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#595959;
+        background:#d9d9d9; border-bottom: 1px solid #a7a9ac;">
+                <div class="col-4">
+                    <strong>FORMA DE PAGO</strong>
+                </div>
+                <div class="col-2">
+                    <strong>MONEDA</strong>
+                </div>
+                <div class="col-3">
+                    <strong>TIEMPO DE ENTREGA</strong>
+                </div>
+                <div class="col-3">
+                    <strong>CENTRO DE COSTO</strong>
+                </div>
+            </div>
+            <div class="row"
+                 style="font-family: Calibri, Arial, sans-serif; font-size: 12px;  padding-top: 5px; min-height: 25px;">
+                <div class="col-4">
+                    <span style="color:#595959; text-transform: uppercase; padding: 25px 8px 0 8px;" class="m-0"
+                          t-field="o.payment_term_id"></span>
+                </div>
+                <div class="col-2">
+                    <span style="color:#595959; text-transform: uppercase; padding: 25px 8px 0 8px;" class="m-0"
+                          t-field="o.currency_id.full_name"></span>
+                </div>
+                <div class="col-3">
+                    <span style="color:#595959; text-transform: uppercase; padding: 25px 8px 0 8px;" class="m-0"
+                          t-field="o.date_planned"></span>
+                </div>
+                <div class="col-3">
+                    <span style="color:#595959; text-transform: uppercase; padding: 25px 8px 0 8px;" class="m-0"
+                    ></span>
+                </div>
+            </div>
+        </t>
+
+        <br/>
+
+    </template>
+    <template id="report_after_header_service_order_wurfel">
+        <t t-if="o.type=='order_service'">
+            <div class="row"
+                 style="padding: 2px 0 2px 8px; font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#595959;">
+                <div class="col-6">
+                    <strong>PROVEEDOR</strong>
+                </div>
+                <div class="col-6">
+                    <strong>COMPRADOR</strong>
+                </div>
+            </div>
+            <div class="row"
+                 style="font-family: Calibri, Arial, sans-serif; font-size: 12px; padding-top: 2px;">
+                <div class="col-2" style="padding-left: 8px;">
+                    <strong style="color:#858686;">CONTACTO:</strong>
+                </div>
+                <div class="col-4">
+                    <span style="color:#808080; text-transform: uppercase;"
+                          t-field="o.partner_id.main_contact">
+                    </span>
+                </div>
+                <div class="col-2" style="padding-left: 8px;">
+                    <strong style="color:#858686;">CONTACTO:</strong>
+                </div>
+                <div class="col-4">
+                    <span style="color:#808080; text-transform: uppercase;" class="m-0">
+                        <t t-if="o.company_id.partner_id">
+                            <span t-field="o.company_id.partner_id.main_contact"/>
+                        </t>
+                    </span>
+                </div>
+            </div>
+            <div class="row"
+                 style="font-family: Calibri, Arial, sans-serif; font-size: 12px; padding-top: 2px;">
+                <div class="col-2" style="padding-left: 8px;">
+                    <strong style="color:#858686;">RUC:</strong>
+                </div>
+                <div class="col-4">
+                    <span style="color:#808080;"
+                          t-field="o.partner_id.vat">
+                    </span>
+                </div>
+                <div class="col-2" style="padding-left: 8px;">
+                    <strong style="color:#858686;">RUC:</strong>
+                </div>
+                <div class="col-4">
+                    <span style="color:#808080;"
+                          t-field="o.company_id.partner_id.vat">
+                    </span>
+                </div>
+            </div>
+            <div class="row"
+                 style="font-family: Calibri, Arial, sans-serif; font-size: 12px; padding-top: 2px;">
+                <div class="col-2" style="padding-left: 8px;">
+                    <strong style="color:#858686;">RAZÓN SOCIAL:</strong>
+                </div>
+                <div class="col-4">
+                    <span style="color:#595959; text-transform: uppercase;" class="m-0"
+                          t-field="o.partner_id.name"></span>
+                </div>
+                <div class="col-2" style="padding-left: 8px;">
+                    <strong style="color:#858686;">RAZÓN SOCIAL:</strong>
+                </div>
+                <div class="col-4">
+                    <span style="color:#595959; text-transform: uppercase;" class="m-0"
+                          t-field="o.company_id.partner_id.name"></span>
+                </div>
+            </div>
+            <div class="row"
+                 style="font-family: Calibri, Arial, sans-serif; font-size: 12px; padding-top: 2px;">
+                <div class="col-2" style="padding-left: 8px;">
+                    <strong style="color:#858686;">DIRECCIÓN:</strong>
+                </div>
+                <div class="col-4">
+                    <span style="color:#595959; text-transform: uppercase;" class="m-0"
+                          t-field="o.partner_id.street"></span>-
+                    <span style="color:#595959; text-transform: uppercase;" class="m-0"
+                          t-field="o.partner_id.city"></span>-
+                    <span style="color:#595959; text-transform: uppercase;" class="m-0"
+                          t-field="o.partner_id.state_id"></span>-
+                    <span style="color:#595959; text-transform: uppercase;" class="m-0"
+                          t-field="o.partner_id.country_id"></span>
+                </div>
+                <div class="col-2" style="padding-left: 8px;">
+                    <strong style="color:#858686;">DIRECCIÓN:</strong>
+                </div>
+                <div class="col-4">
+                    <span style="color:#595959; text-transform: uppercase;" class="m-0"
+                          t-field="o.company_id.partner_id.street"></span>-
+                    <span style="color:#595959; text-transform: uppercase;" class="m-0"
+                          t-field="o.company_id.partner_id.city"></span>-
+                    <span style="color:#595959; text-transform: uppercase;" class="m-0"
+                          t-field="o.company_id.partner_id.state_id"></span>-
+                    <span style="color:#595959; text-transform: uppercase;" class="m-0"
+                          t-field="o.company_id.partner_id.country_id"></span>
+                </div>
+            </div>
+            <div class="row"
+                 style="font-family: Calibri, Arial, sans-serif; font-size: 12px; padding-top: 2px;">
+                <div class="col-2" style="padding-left: 8px;">
+                    <strong style="color:#858686;">TELÉFONO:</strong>
+                </div>
+                <div class="col-4">
+                    <span style="color:#595959; text-transform: uppercase; padding: 25px 8px 0 8px;" class="m-0"
+                          t-field="o.partner_id.phone"></span>
+                </div>
+                <div class="col-2" style="padding-left: 8px;">
+                    <strong style="color:#858686;">TELÉFONO:</strong>
+                </div>
+                <div class="col-4">
+                    <span style="color:#595959; text-transform: uppercase;" class="m-0"
+                          t-field="o.company_id.partner_id.phone"></span>
+                </div>
+            </div>
+            <div class="row"
+                 style="font-family: Calibri, Arial, sans-serif; font-size: 12px; padding-top: 2px;">
+                <div class="col-2" style="padding-left: 8px;">
+                    <strong style="color:#858686;">EMAIL:</strong>
+                </div>
+                <div class="col-4">
+                    <span style="color:#595959; text-transform: uppercase;" class="m-0"
+                          t-field="o.partner_id.email"></span>
+                </div>
+                <div class="col-2" style="padding-left: 8px;">
+                    <strong style="color:#858686;">EMAIL:</strong>
+                </div>
+                <div class="col-4" style="padding-left: 8px;">
+                    <span style="color:#595959; text-transform: uppercase;" class="m-0"
+                          t-field="o.company_id.partner_id.email"></span>
+                </div>
+            </div>
+            <div class="row"
+                 style="padding: 30px 0 8px 8px; font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#595959;">
+                <div class="col-4">
+                    <strong>FORMA DE PAGO</strong>
+                </div>
+                <div class="col-2">
+                    <strong>MONEDA</strong>
+                </div>
+                <div class="col-3">
+                    <strong>TIEMPO DE ENTREGA</strong>
+                </div>
+                <div class="col-3">
+                    <strong>CENTRO DE COSTO</strong>
+                </div>
+            </div>
+            <div class="row"
+                 style="font-family: Calibri, Arial, sans-serif; font-size: 12px;  padding-top: 5px; min-height: 25px;">
+                <div class="col-4">
+                    <span style="color:#595959; text-transform: uppercase; padding: 25px 8px 0 8px;" class="m-0"
+                          t-field="o.payment_term_id"></span>
+                </div>
+                <div class="col-2">
+                    <span style="color:#595959; text-transform: uppercase; padding: 25px 8px 0 8px;" class="m-0"
+                          t-field="o.currency_id.full_name"></span>
+                </div>
+                <div class="col-3">
+                    <span style="color:#595959; text-transform: uppercase; padding: 25px 8px 0 8px;" class="m-0"
+                          t-field="o.date_planned"></span>
+                </div>
+                <div class="col-3">
+                    <span style="color:#595959; text-transform: uppercase; padding: 25px 8px 0 8px;" class="m-0"
+                    ></span>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!--  Parte para listar los productos    -->
+    <template id="report_list_service_order_lft">
+        <table class="table table-sm table-borderless"
+               style="padding-top: 25px;border-bottom: 1px solid #a7a9ac;">
+            <t t-set="has_barcode"
+               t-value="any(move_line.product_id and move_line.product_id.sudo().barcode for move_line in o.order_line)"/>
+            <thead style="background:#d9d9d9; font-family: Calibri, Arial, sans-serif; font-size: 13px; color:#595959;">
+                <tr>
+                    <th class="text-start" name="th_code_product">
+                        <strong>CÓDIGO</strong>
+                    </th>
+                    <th class="text-start" name="th_desc_product">
+                        <strong>DESCRIPCIÓN</strong>
+                    </th>
+                    <th class="text-start" name="th_um_product">
+                        <strong>UNID</strong>
+                    </th>
+                    <th>
+                        <strong>CANT.</strong>
+                    </th>
+                    <th class="text-end">
+                        <strong>VALOR UNIT</strong>
+                    </th>
+                    <th class="text-end">
+                        <strong>VALOR TOTAL</strong>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- In case you come across duplicated lines, ask NIM or LAP -->
+                <t t-set="index" t-value="0"/>
+                <t t-set="cnt" t-value="len(o.order_line)"/>
+                <t t-if="cnt > 5">
+                    <t t-set="remaining_rows" t-value="10 - cnt"/>
+                </t>
+                <t t-else="">
+                    <t t-set="remaining_rows" t-value="5 - cnt"/>
+                </t>
+                <tr t-foreach="o.order_line" t-as="ml"
+                    t-if="o.order_line">
+                    <t t-set="index" t-value="index + 1"/>
+                    <t t-if="index % 2 == 0">
+                        <tr style="background-color: #f2f2f2; font-family: Calibri, Arial, sans-serif; font-size: 13px; color:#2c2b2b; height:80px;">
+                            <t t-call="l10n_pe_lft_report.line_product_service_order_lft"/>
+                        </tr>
+                    </t>
+                    <t t-else="">
+                        <tr style="font-family: Calibri, Arial, sans-serif; font-size: 13px; color:#2c2b2b; height:80px;">
+                            <t t-call="l10n_pe_lft_report.line_product_service_order_lft"/>
+                        </tr>
+                    </t>
+
+                </tr>
+                <!-- Extra empty rows -->
+                <t t-foreach="range(remaining_rows)" t-as="i">
+                    <t t-set="index" t-value="index + 1"/>
+                    <t t-set="is_even" t-value="index % 2 == 0"/>
+                    <div>
+                        <tr t-att-style="is_even and 'background-color: #f2f2f2; height: 80px;' or 'background-color: #ffffff; height: 80px;'">
+                            <td colspan="7"></td>
+                        </tr>
+                    </div>
+                </t>
+            </tbody>
+        </table>
+
+    </template>
+    <template id="line_product_service_order_lft">
+        <td>
+            <span t-field="ml.product_id.code"></span>
+        </td>
+        <td>
+            <span t-field="ml.product_id.display_name">Customizable Desk</span>
+        </td>
+        <td>
+            <span t-field="ml.product_uom" groups="uom.group_uom">units</span>
+        </td>
+        <td class="text-center">
+            <span t-field="ml.product_qty">3.00</span>
+        </td>
+        <td class="text-end">
+<!--            <span class="text-nowrap" t-field="ml.price_unit">9.00-->
+<!--            </span>-->
+            <span t-field="ml.price_unit"
+                  t-options='{"widget": "monetary", "display_currency": ml.currency_id}'/>
+
+        </td>
+        <td class="text-end">
+            <span class="text-nowrap" t-field="ml.price_subtotal">
+                27.00
+            </span>
+        </td>
+    </template>
+    <template id="report_list_product_service_order_wurfel">
+        <div class="row" style="padding-top:10px;">
+            <table class="table table-sm table-borderless"
+                   style="border: 1px solid #a7a9ac;">
+                <t t-set="has_barcode"
+                   t-value="any(move_line.product_id and move_line.product_id.sudo().barcode for move_line in o.order_line)"/>
+                <thead style="background:#d1d3d4; border: 1px solid #a7a9ac; font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#3c3b3b;">
+                    <tr>
+                        <th class="text-start" name="th_code_product"
+                            style="border: 1px solid  #a7a9ac; color:#3b3b3b;">
+                            <strong>CÓDIGO</strong>
+                        </th>
+                        <th class="text-start" name="th_desc_product"
+                            style="border: 1px solid  #a7a9ac; color:#3b3b3b;">
+                            <strong>DESCRIPCIÓN</strong>
+                        </th>
+                        <th class="text-start" name="th_um_product"
+                            style="border: 1px solid  #a7a9ac; color:#3b3b3b;">
+                            <strong>U.M</strong>
+                        </th>
+                        <th style="border: 1px solid  #a7a9ac; color:#3b3b3b;">
+                            <strong>CANT.</strong>
+                        </th>
+                        <th style="border: 1px solid  #a7a9ac; color:#3b3b3b;">
+                            <strong>V. UNIT</strong>
+                        </th>
+                        <th style="border: 1px solid  #a7a9ac; color:#3b3b3b;">
+                            <strong>IMPORTE</strong>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody style="font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#2c2b2b;">
+                    <!-- In case you come across duplicated lines, ask NIM or LAP -->
+                    <t t-set="index" t-value="0"/>
+                    <t t-set="cnt" t-value="len(o.order_line)"/>
+                    <t t-if="cnt > 14">
+                        <t t-set="remaining_rows" t-value="22 - cnt"/>
+                    </t>
+                    <t t-else="">
+                        <t t-set="remaining_rows" t-value="14 - cnt"/>
+                    </t>
+                    <tr t-foreach="o.order_line" t-as="ml"
+                        t-if="o.order_line">
+                        <t t-set="index" t-value="index + 1"/>
+                        <td>
+                            <span t-field="ml.product_id.code">Code Desk</span>
+                        </td>
+                        <td>
+                            <span t-field="ml.product_id.display_name">Customizable Desk</span>
+                        </td>
+                        <td>
+                            <span t-field="ml.product_uom" groups="uom.group_uom">units</span>
+                        </td>
+                        <td class="text-center">
+                            <span t-field="ml.product_qty">3.00</span>
+                        </td>
+                        <td class="text-end">
+                            <!--                            <span class="text-nowrap" t-field="ml.price_unit">9.00-->
+                            <!--                            </span>-->
+                            <span t-field="ml.price_unit"
+                                  t-options='{"widget": "monetary", "display_currency": ml.currency_id}'/>
+                        </td>
+                        <td style="border-right: 1px solid #a7a9ac;">
+                            <span class="text-nowrap" t-field="ml.price_subtotal">
+                                27.00
+                            </span>
+                        </td>
+                    </tr>
+                    <t t-foreach="range(remaining_rows)" t-as="i">
+                        <tr style="height: 30px;">
+                            <td style="border-right: 1px solid #a7a9ac;" colspan="7"></td>
+                        </tr>
+                        <t t-set="index" t-value="index + 1"/>
+                    </t>
+                </tbody>
+            </table>
+        </div>
+    </template>
+
+    <template id="report_table_observ_service_order_lft">
+        <div class="clearfix row" style="padding-top:10px">
+            <div class="col-7 col-sm-7 col-md-7">
+                <div style="background-color:#f2f2f2; height: 120px;">
+                    <strong style="font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#595959;">
+                        OBSERVACIONES:
+                    </strong>
+                    <span class="m-0" t-field="o.notes"></span>
+                </div>
+            </div>
+            <div class="col-5 col-sm-5 col-md-5 text-end"
+                 style="padding-left: 10px">
+                <div class="row" style="background:#f2f2f2">
+                    <div class="col-8 col-sm-8 col-md-8 text-end">
+                        <span style="font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#595959;">
+                            SUBTOTAL
+                        </span>
+                        <br/>
+                    </div>
+                    <div class="col-4 col-sm-4 col-md-4 text-end"
+                         style="padding-right:8px; font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#595959;">
+                        <span t-esc="o.currency_id.symbol"/>
+                        <span t-esc="'{:,.2f}'.format(o.amount_untaxed)"/>
+                        <br/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8 col-sm-8 col-md-8 text-end" style=" height: 75px;">
+                        <span style="font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#595959;">
+                            I.G.V
+                        </span>
+                        <br/>
+                    </div>
+                    <div class="col-4 col-sm-4 col-md-4 text-end"
+                         style="padding-right:8px; font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#595959;">
+                        <span t-esc="o.currency_id.symbol"/>
+                        <span t-esc="'{:,.2f}'.format(o.amount_tax)"/>
+                        <br/>
+                    </div>
+                </div>
+                <div class="row" style="background:#f2f2f2; border-top: 1px solid #bfbfbf;">
+                    <div class="col-8 col-sm-8 col-md-8 text-end">
+                        <span>
+                            <strong style="font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#595959;">
+                                IMPORTE TOTAL
+                            </strong>
+                        </span>
+                        <br/>
+                    </div>
+                    <div class="col-4 col-sm-4 col-md-4 text-end"
+                         style="padding-right:8px; font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#595959;">
+                        <span t-esc="o.currency_id.symbol"/>
+                        <span t-esc="'{:,.2f}'.format(o.amount_total)"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </template>
+    <template id="report_table_observ_service_order_wurfel">
+        <div class="clearfix row" style="padding-top:5px">
+            <div class="col-8 col-sm-8 col-md-8"
+                 style="border: 1px solid #a7a9ac; padding-left: 8px; height: 120px;">
+                <strong style="font-family: Calibri, Arial, sans-serif; font-size: 9px; color:#2c2b2b;">
+                    OBSERVACIONES:
+                </strong>
+                <span class="m-0" t-field="o.notes"></span>
+            </div>
+            <div class="col-4 text-end"
+                 style="padding-left: 10px; font-family: Calibri, Arial, sans-serif; font-size: 12px; color:#3b3b3b;">
+                <div class="row" style="height: 40px;">
+                    <div class="col-8 col-sm-8 col-md-8 text-end" style="padding-right: 25px;">
+                        <strong style="line-height: 40px;">
+                            SUBTOTAL
+                        </strong>
+                    </div>
+                    <div class="col-4 col-sm-4 col-md-4 text-end"
+                         style="padding-right:8px; border: 1px dashed #a7a9ac; line-height: 40px;">
+                        <span t-esc="o.currency_id.symbol"/>
+                        <span t-esc="'{:,.2f}'.format(o.amount_untaxed)">0.0</span>
+                    </div>
+                </div>
+                <div class="row" style="height: 40px;">
+                    <div class="col-8 col-sm-8 col-md-8 text-end" style="padding-right: 25px;">
+                        <strong style="line-height: 40px;">
+                            I.G.V
+                        </strong>
+                    </div>
+                    <div class="col-4 col-sm-4 col-md-4 text-end"
+                         style="padding-right:8px; border: 1px dashed #a7a9ac; line-height: 40px;">
+                        <span t-esc="o.currency_id.symbol"/>
+                        <span t-esc="'{:,.2f}'.format(o.amount_tax)">0.0</span>
+                    </div>
+                </div>
+                <div class="row"
+                     style="border: 1px dashed black; height: 40px;">
+                    <div class="col-8 col-sm-8 col-md-8 text-end" style="padding-right: 25px;">
+                        <span style="line-height: 40px;">
+                            <strong>IMPORTE TOTAL</strong>
+                        </span>
+                    </div>
+                    <div class="col-4 col-sm-4 col-md-4 text-end"
+                         style="padding-right:8px; line-height: 40px;">
+                        <span t-esc="o.currency_id.symbol"/>
+                        <span t-esc="'{:,.2f}'.format(o.amount_total)">0.0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/>
+
+
+    </template>
+</odoo>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html style="scroll-behavior: smooth;">
+
+<head>
+</head>
+
+<body style="font-family:Popins !important">
+   <!-- DATOS DE LA EMPRESA -->
+   <section class="oe_container">
+      <div class="row align-items-center mt-5">
+         <div class="col text-end" style="padding-right: 52px;">
+            <img src="img/media/imagotipo.png" style="max-height: 56px; width: auto;">
+         </div>
+         <div class="col">
+            <h3>
+               <span style="margin-right: 16px;margin-left: -52px;">|</span>
+               <span>Aliados en Desarrollo Odoo</span>
+            </h3>
+         </div>
+      </div>
+      <div class="text-center">
+         <p>Brindamos servicios outsourcing de programación a implementadores, negocios y partners Odoo.</p>
+      </div>
+   </section>
+
+   <!-- DATOS DEL MÓDULO -->
+   <section class="oe_container">
+      <div class="text-center mt-5">
+         <h2 style="color:#00AAAA">
+            Reporte TXT Pagos masivos - Telecrédito BCP
+         </h2>
+      </div>
+      <ul class="list-unstyled" style="margin-left: 120px; margin-right: 120px;">
+         <li class="mt-1">
+            <i class="fa fa-check" style="background-color: #FFFFFF; color: #00AAAA;"></i>
+            Permite crear pagos masivos de proveedores
+         </li>
+         <li class="mt-1">
+            <i class="fa fa-check" style="background-color: #FFFFFF; color: #00AAAA;"></i>
+            Genera el reporte TXT para ser importado en el portal de Telecrédito BCP
+         </li>
+      </ul>
+      <div class="oe_row text-center mt-5">
+         <h2>GUÍA DE USUARIO</h2>
+         <hr style="width:80%; height:1px; margin: 0 auto;">
+      </div>
+      <div class="oe_row oe_spaced">
+         <h3 style="margin-left: 48px;">
+            1. Configuración de la cuenta bancaria
+         </h3>
+         <div class="row no-gutters align-items-center">
+            <div class="col-lg-3">
+               <ul>
+                  <li>Ir a <b>Contactos</b></li>
+                  <li>Ingresar a un proveedor</li>
+                  <li>Ir a la pestaña <b>Contabilidad</b></li>
+                  <li>Crear una cuenta bancaria</li>
+                  <li>Seleccionar el banco</li>
+                  <li>Seleccionar el tipo de cuenta</li>
+                  <li>Digitar el número de cuenta</li>
+                  <li>Dar click en <b>Guardar</b></li>
+                  <li>También se puede configurar las cuentas bancarias desde <b>Ver detalles de cuentas</b></li>
+               </ul>
+            </div>
+            <div class="col-lg-9 text-center">
+               <img class="img-fluid" src="img/Screenshot_1.png">
+            </div>
+         </div>
+      </div>
+      <div class="oe_row oe_spaced">
+         <h3 style="margin-left: 48px;">
+            2. Registro de provisión de pago: Método por factura
+         </h3>
+         <div class="row no-gutters align-items-center">
+            <div class="col-lg-3">
+               <ul>
+                  <li>Ir a <b>Contabilidad > Proveedores</b></li>
+                  <li>Ingresar a una Factura</li>
+                  <li>Dar click en <b>Registrar pago</b></li>
+                  <li>Seleccionar el diario de BCP</li>
+                  <li>Seleccionar el método de pago Telecrédito</li>
+                  <li>Dar click en <b>Crear pago</b></li>
+               </ul>
+            </div>
+            <div class="col-lg-9 text-center">
+               <img class="img-fluid" src="img/Screenshot_2.png">
+            </div>
+         </div>
+      </div>
+      <div class="oe_row oe_spaced">
+         <h3 style="margin-left: 48px;">
+            3. Registro de provisión de pago: Método por lote de facturas
+         </h3>
+         <div class="row no-gutters align-items-center">
+            <div class="col-lg-3">
+               <ul>
+                  <li>Ir a <b>Contabilidad > Proveedores</b></li>
+                  <li>Aplicar filtros de búsqueda</li>
+                  <li>Seleccionar las facturas que se desean pagar</li>
+                  <li>Dar click en <b>Acción > Registrar pago</b></li>
+                  <li>Seleccionar el diario de BCP</li>
+                  <li>Seleccionar el método de pago Telecrédito</li>
+                  <li>Dar click en <b>Agupar pagos</b> en caso se desee agrupar todos los pagos en uno solo, dejar en blanco en caso se desee generar un pago por cada factura</li>
+                  <li>Dar click en <b>Crear pago</b></li>
+               </ul>
+            </div>
+            <div class="col-lg-9 text-center">
+               <img class="img-fluid" src="img/Screenshot_3.png">
+            </div>
+         </div>
+      </div>
+      <div class="oe_row oe_spaced">
+         <h3 style="margin-left: 48px;">
+            4. Creación del reporte TXT para Telecrédito BCP
+         </h3>
+         <div class="row no-gutters align-items-center">
+            <div class="col-lg-3">
+               <ul>
+                  <li>Ir a <b>Contabilidad > Proveedores > Pago por lotes</b></li>
+                  <li>Dar click en <b>Nuevo</b></li>
+                  <li>Seleccionar el banco BCP</li>
+                  <li>Seleccionar el método de pago <b>Telecrédito</b></li>
+                  <li>Dar click en <b>Agregar línea</b></li>
+                  <li>Seleccionar los pagos a incluir en el reporte</li>
+                  <li>Dar click en <b>Validar</b></li>
+               </ul>
+            </div>
+            <div class="col-lg-9 text-center">
+               <img class="img-fluid" src="img/Screenshot_4.png">
+            </div>
+         </div>
+      </div>
+      <div class="oe_row oe_spaced">
+         <h3 style="margin-left: 48px;">
+            5. Descarga del reporte TXT
+         </h3>
+         <div class="row no-gutters align-items-center">
+            <div class="col-lg-3">
+               <ul>
+                  <li>Dar click en el link del archivo TXT generado</li>
+                  <li>Se descargará el archivo TXT</li>
+                  <li>Puede cerrar la ventana</li>
+               </ul>
+            </div>
+            <div class="col-lg-9 text-center">
+               <img class="img-fluid" src="img/Screenshot_5.png">
+            </div>
+         </div>
+      </div>
+      <div class="oe_row oe_spaced">
+         <h3 style="margin-left: 48px;">
+            6. Volver a generar el reporte TXT
+         </h3>
+         <div class="row no-gutters align-items-center">
+            <div class="col-lg-3">
+               <ul>
+                  <li>Dar click en <b>Volver a generar el archivo de exportación</b></li>
+                  <li>También se puede volver a descargar el archivo TXT desde la pestaña <b>Archivo exportado</b></li>
+                  <li>Dar click en el link del archivo TXT generado</li>
+                  <li>Se descargará el archivo TXT</li>
+               </ul>
+            </div>
+            <div class="col-lg-9 text-center">
+               <img class="img-fluid" src="img/Screenshot_6.png">
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- DATOS CONTACTO -->
+   <section class="container">
+      <div class="text-center mt-5">
+         <h2>Personaliza Odoo con expertos</h2>
+      </div>
+      <div class="row d-flex align-items-stretch text-center">
+         <div class="col-lg-4">
+            <img src="img/services/desarrollo.png" loading="lazy" style="max-width: 100%; height: auto;" />
+            <h3>Servicio de Desarrollo</h3>
+            <p>Creamos apps Odoo personalizados para tu negocio y clientes.</p>
+            <p>
+               <a class="btn btn-primary"
+                  style="color:#FFFFFF; background-color:#00AAAA; border-color:#00AAAA; border-radius:10rem;"
+                  href="https://develogers.com/calendar/servicio-migracion-7">Agendar cita gratuita
+               </a>
+            </p>
+            <p>
+               <a style="color:#00AAAA;" href="https://develogers.com/servicio-desarrollo">Más información</a>
+            </p>
+         </div>
+         <div class="col-lg-4">
+            <img src="img/services/migracion.png" loading="lazy" style="max-width: 100%; height: auto;" />
+            <h3>Servicio de Migración</h3>
+            <p>Actualizamos de versión módulos y bases de datos Odoo.</p>
+            <p>
+               <a class="btn btn-primary"
+                  style="color:#FFFFFF; background-color:#00AAAA; border-color:#00AAAA; border-radius:10rem;"
+                  href="https://develogers.com/calendar/servicio-migracion-7">Agendar cita gratuita
+               </a>
+            </p>
+            <p>
+               <a style="color:#00AAAA;" href="https://develogers.com/servicio-migracion">Más información</a>
+            </p>
+         </div>
+         <div class="col-lg-4">
+            <img src="img/services/integracion.png" loading="lazy" style="max-width: 100%; height: auto;" />
+            <h3>Servicio Integración</h3>
+            <p>Integramos Odoo con otros softwares o sistemas.</p>
+            <p>
+               <a class="btn btn-primary"
+                  style="color:#FFFFFF; background-color:#00AAAA; border-color:#00AAAA; border-radius:10rem;"
+                  href="https://develogers.com/calendar/servicio-integracion-8">Agendar cita gratuita
+               </a>
+            </p>
+            <p>
+               <a style="color:#00AAAA;" href="https://develogers.com/servicio-integracion">Más información</a>
+            </p>
+         </div>
+      </div>
+      <div class="text-center mt-5">
+         <h2>Si Odoo no lo tiene... ¡Nosotros lo creamos!</h2>
+         <a style="color:#00AAAA;" href="https://develogers.com/nosotros">¿Por qué escogernos?</a>
+      </div>
+      <div class="row d-flex align-items-stretch justify-content-center text-center mt-5">
+         <h2>Explora nuestro contenido</h2>
+         <span>
+            <a href="https://www.youtube.com/@develogers" target="_blank">
+               <i class="fa fa-3x fa-fw mr-2 fa-youtube-play" style="background-color: #FFFFFF; color: #00AAAA;"></i>
+            </a>
+            <a href="https://www.facebook.com/develogers" target="_blank">
+               <i class="fa fa-3x fa-fw mr-2 fa-facebook-square" style="background-color: #FFFFFF; color: #00AAAA;"></i>
+            </a>
+            <a href="https://www.linkedin.com/company/develogers" target="_blank">
+               <i class="fa fa-3x fa-fw mr-2 fa-linkedin-square" style="background-color: #FFFFFF; color: #00AAAA;"></i>
+            </a>
+            <a href="https://github.com/DevelogersOrg" target="_blank">
+               <i class="fa fa-3x fa-fw mr-2 fa-github-square" style="background-color: #FFFFFF; color: #00AAAA;"></i>
+            </a>
+            <a href="https://wa.link/2cc9dn" target="_blank">
+               <i class="fa fa-3x fa-fw mr-2 fa-whatsapp" style="background-color: #FFFFFF; color: #00AAAA;"></i>
+            </a>
+            <a href="mailto:info@develogers.com" target="_blank">
+               <i class="fa fa-3x fa-fw mr-2 fa-envelope" style="background-color: #FFFFFF; color: #00AAAA;"></i>
+            </a>
+         </span>
+      </div>
+   </section>
+
+</body>
+
+</html>

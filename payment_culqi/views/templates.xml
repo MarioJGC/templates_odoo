@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="culqi_form_template">
+        <script src="https://checkout.culqi.com/js/v4"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+
+                Culqi.publicKey = "<t t-esc="public_key" />";
+
+                Culqi.settings({
+                    title: 'Culqi Store',
+                    currency: "<t t-esc="currency" />",
+                    amount: <t t-esc="amount" />,
+                });
+
+                Culqi.options({
+                    lang: "auto",
+                    installments: false,
+                    paymentMethods: {
+                        tarjeta: true,
+                        yape: true,
+                        bancaMovil: false,
+                        agente: false,
+                        billetera: false,
+                        cuotealo: false,
+                    },
+                    style: {
+                        logo: "https://static.culqi.com/v2/v2/static/img/logo.png",
+                    }
+                });
+
+                Culqi.open();
+
+                <!-- Variable auxiliar -->
+                window.state_optional = false;
+
+                window.culqi = function () {
+                    if (Culqi.token) {
+                        const token = Culqi.token.id;
+                        const email = Culqi.token.email;
+
+                        const private_key = "<t t-esc="private_key"/>";
+                        const currency = "<t t-esc="currency"/>";
+                        const amount = <t t-esc="amount"/>;
+                        const reference = "<t t-esc="reference"/>";
+
+                        window.state_optional = true;
+                        Culqi.close();
+
+                        fetch('/payment/culqi/process_payment', {
+                            method: 'POST',
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json'
+                            },
+                            
+                            body: JSON.stringify({
+                                params: { token, email, private_key, currency, amount, reference }
+                            })
+
+                        })
+                            .then(response => response.json())
+                            // Esta es la respuesta para cualquiera de los dos casos
+                            .then(data => {
+                                if (data.result.redirect_url) {
+                                    window.location.href = data.result.redirect_url;
+                                } else {
+                                    window.location.href = '/payment/culqi/render_form';
+                                    alert(data.result.message);
+                                }
+                            })
+                            .catch(error => console.error('Error:', error));
+
+                    } else if (Culqi.order) {
+                        console.log('Se ha creado el objeto Order: ', Culqi.order);
+                    } else {
+                        console.error('Error:', Culqi.error);
+                    }
+                };
+            });
+        </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+
+                const targetNode = document.body;
+                const config = { childList: true, subtree: true };
+
+                const observer = new MutationObserver(function(mutationsList) {
+                    
+                    for (const mutation of mutationsList) {
+                        if (mutation.type === 'childList') {
+                            
+                            if (!document.querySelector('#culqi') &amp;&amp; !window.state_optional) {
+                                observer.disconnect();
+                                window.location.href = '/shop/payment'; 
+                            }
+                        }
+                    }
+                });
+
+                observer.observe(targetNode, config);
+            });
+        </script>
+    </template>
+
+    <template id="redirect_form">
+        <form t-att-action="api_url" method="post">
+            <input type="hidden" name="acquirer_reference" t-att-value="item_name"/>
+            <input type="hidden" name="amount" t-att-value="amount"/>
+            <input type="hidden" name='reference' t-att-value='reference'/>
+            <input type="hidden" name="currency" t-att-value="currency_code"/>
+        </form>
+    </template>
+
+</odoo>

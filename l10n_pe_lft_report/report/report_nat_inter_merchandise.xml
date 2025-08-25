@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="report_merchandise_custom_lft">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <div class="header">
+                        <div class="row">
+                            <t t-if="o.company_id.company_head_type  == 'lft'">
+                                <t t-call="l10n_pe_lft_report.report_general_left_merchandise_lft_header"/>
+                                <t t-call="l10n_pe_lft_report.report_right_header_merchandise_lft"/>
+                            </t>
+                        </div>
+                    </div>
+                    <t t-call="web.internal_layout">
+                        <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
+                        <div class="page" style="margin-bottom: 100px;">
+                            <div class="oe_structure"/>
+                            <t t-if="o.company_id.company_head_type  == 'lft'">
+                                <t t-call="l10n_pe_lft_report.report_after_header_merchandise_lft"/>
+                            </t>
+                            <div class="oe_structure"></div>
+                            <t t-if="o.company_id.company_head_type  == 'lft'">
+                                <t t-call="l10n_pe_lft_report.report_list_product_merchandise_lft"/>
+                            </t>
+                            <div class="oe_structure"></div>
+                            <div id="right-elements">
+                                <t t-if="o.company_id.company_head_type  == 'lft'">
+                                    <t t-call="l10n_pe_lft_report.report_table_observ_merchandise_lft"/>
+                                </t>
+                            </div>
+                        </div>
+                    </t>
+                    <div class="footer">
+                        <div class="row text-center">
+                            <div class="col-3" t-if="report_type == 'pdf'" style="color:#595959">
+                                Página:
+                                <span class="page"/>
+                                /
+                                <span class="topage"/>
+                            </div>
+                            <div t-if="o.company_id.website" class="col-3 text-muted">
+                                <span t-out="o.company_id.website">(website)</span>
+                            </div>
+                            <div t-if="o.company_id.social_facebook" class="col-3 text-muted">
+                                <span t-out="o.company_id.social_facebook">(facebook)</span>
+                            </div>
+                            <div t-if="report_type == 'pdf' and display_name_in_footer" class="col-3 text-muted">
+                                <span t-out="o.name">(document name)</span>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+        <template id="report_merchandise_custom_wurfel">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <div class="header">
+                        <div class="row">
+                            <t t-if="o.company_id.company_head_type  == 'wurfel'">
+                                <t t-call="l10n_pe_lft_report.report_general_left_header_wurfel"/>
+                                <t t-call="l10n_pe_lft_report.report_right_header_merchandise_wurfel"/>
+                            </t>
+                        </div>
+                    </div>
+                    <t t-call="web.internal_layout">
+                        <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
+                        <div class="page" style="margin-bottom: 100px;">
+                            <div class="oe_structure"/>
+                            <t t-if="o.company_id.company_head_type  == 'wurfel'">
+                                <t t-call="l10n_pe_lft_report.report_after_header_merchandise_wurfel"/>
+                            </t>
+
+                            <div class="oe_structure"></div>
+                            <t t-if="o.company_id.company_head_type  == 'wurfel'">
+                                <t t-call="l10n_pe_lft_report.report_list_product_merchandise_wurfel"/>
+                            </t>
+                            <div class="oe_structure"></div>
+                            <div id="right-elements">
+                                <t t-if="o.company_id.company_head_type  == 'wurfel'">
+                                    <t t-call="l10n_pe_lft_report.report_table_observ_merchandise_wurfel"/>
+                                </t>
+                            </div>
+                        </div>
+                    </t>
+                    <div class="footer">
+                        <div class="row text-center">
+                            <div class="col-3" t-if="report_type == 'pdf'" style="color:#595959">
+                                Página:
+                                <span class="page"/>
+                                /
+                                <span class="topage"/>
+                            </div>
+                            <div t-if="o.company_id.website" class="col-3 text-muted">
+                                <span t-out="o.company_id.website">(website)</span>
+                            </div>
+                            <div t-if="o.company_id.social_facebook" class="col-3 text-muted">
+                                <span t-out="o.company_id.social_facebook">(facebook)</span>
+                            </div>
+                            <div t-if="report_type == 'pdf' and display_name_in_footer" class="col-3 text-muted">
+                                <span t-out="o.name">(document name)</span>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

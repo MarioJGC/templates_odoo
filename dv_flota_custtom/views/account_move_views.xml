@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="account_move_view_tree" model="ir.ui.view">
+        <field name="name">account.move.view.tree</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_invoice_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='invoice_partner_display_name']" position="after">
+                <field name="invoice_products_summary" string="Detalle"/>
+                <field name="placa" string="Placa"/>
+                <field name="kilometro" string="Kilometro" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="account_move_view_search" model="ir.ui.view">
+        <field name="name">account.move.view.search</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='salesperson']" position="after">
+                <filter string="Placa" name="placa" context="{'group_by':'placa'}"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

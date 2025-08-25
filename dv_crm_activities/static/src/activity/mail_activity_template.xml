@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t t-inherit="mail.Activity" t-inherit-mode="extension">
+
+        <xpath expr="//div[@class='o-mail-Activity-note text-break']" position="attributes">
+            <attribute name="t-att-style">activity.type_lead == 'privadas' and 'display: none;' or ''</attribute>
+        </xpath>
+
+        <xpath expr="//div[@class='lh-lg']" position="after">
+
+            <t t-if="activity.type_lead == 'privadas'">
+                <div class="o-mail-Message-content o-min-width-0">
+                    <div class="o-mail-Message-textContent position-relative d-flex">
+                        <div class="position-relative overflow-x-auto d-inline-block">
+                            <div class="o-mail-Message-bubble rounded-bottom-3 position-absolute top-0 start-0 w-100 h-100 bg-info-light border border-info opacity-25 rounded-end-3">
+                            </div>
+                            <div class="position-relative text-break o-mail-Message-body mb-0 py-2 px-3 align-self-start rounded-end-3 rounded-bottom-3 p-1">
+                                <em class="mb-1 me-2" t-if="activity.summary">
+                                    Asunto: <t t-out="activity.summary or ''"/>
+                                </em>
+                                <div class="overflow-x-auto" t-if="activity.note"/>
+                                <t t-out="activity.note or ''"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+
+            <div t-if="activity.start_date and activity.type_lead == 'privadas'" class="o-mail-Activity-note text-break">
+                <strong>Fecha de Inicio: </strong> <t t-out="activity.start_date"/>
+            </div>
+
+            <div t-if="activity.date_deadline and activity.type_lead == 'privadas'" class="o-mail-Activity-note text-break">
+                <strong>Fecha de vencimiento: </strong> <t t-out="activity.date_deadline"/>
+            </div>
+
+        </xpath>
+
+    </t>
+</templates>

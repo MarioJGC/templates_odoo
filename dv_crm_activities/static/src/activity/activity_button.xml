@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-inherit="mail.ActivityButton" t-inherit-mode="extension">
+
+        <xpath expr="//a[@role='button']" position="replace">
+
+            <t t-if="state.groupedActivities.original_objects">
+
+                <t t-foreach="state.groupedActivities.original_objects" t-as="activity" t-key="activity.ids_activity[0] or activity.name">
+
+                    <a class="o-mail-ActivityButton"
+                        role="button"
+                        t-att-id="'activity_button_' + activity.ids_activity[0]"
+                        t-on-click.prevent.stop="() => onClickCustom(activity.ids_activity)"
+                        t-att-aria-label="activity.name"
+                        t-att-title="activity.name"
+                    >
+                        <i class="fa fa-fw fa-lg" t-att-class="activity.icon" role="img"/>
+                    </a>
+                </t>
+
+            </t>
+            <t t-else="">
+                <a class="o-mail-ActivityButton" role="button" t-on-click.prevent.stop="onClick" t-ref="button" t-att-aria-label="title" t-att-title="title">
+                    <i class="fa fa-fw fa-lg" t-att-class="buttonClass" role="img"/>
+                </a>
+            </t>
+
+        </xpath>
+
+    </t>
+</templates>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- View fleet.vehicle tree -->
+    <record id="view_fleet_vehicle_tree" model="ir.ui.view">
+        <field name="name">view.fleet.vehicle.tree</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='model_id']" position="after">
+                <field name="model_year" string="Año"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- View fleet.vehicle form -->
+    <record id="view_fleet_vehicle_form" model="ir.ui.view">
+        <field name="name">view.fleet.vehicle.form</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='color']" position="after">
+                <field name="nro_motor" string="Numero de motor"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- View fleet.vehicle search -->
+    <record id="view_fleet_vehicle_search" model="ir.ui.view">
+        <field name="name">view.fleet.vehicle.search</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='groupby_fueltype']" position="after">
+                <filter string="Año" name="groupby_model_year" context="{'group_by': 'model_year'}"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    
+
+
+
+</odoo>

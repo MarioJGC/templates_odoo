@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<odoo>
+    <template id="pe_ubl_2_1_common_inherit_l10n_pe_advance_global_discount_1" inherit_id="l10n_pe_edi.ubl_pe_21_voided_documents">
+        <xpath expr="//*[name()='cac:Signature']" position="before">
+            <t xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+               xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+                <cac:AdditionalDocumentReference t-if="advance_lines_vals" t-foreach="advance_lines_vals"
+                                                 t-as="advance_lines">
+                    <cbc:ID schemeID="01" t-esc="advance_lines['advance_name']"/>
+                    <cbc:DocumentTypeCode listAgencyName="PE:SUNAT"
+                                          listName="Documento Relacionado"
+                                          listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo12"
+                                          t-esc="advance_lines['l10n_latam_document_type_id']"/>
+                    <cbc:DocumentStatusCode listName="Anticipo" listAgencyName="PE:SUNAT"
+                                            t-esc="advance_lines['index']"/>
+                    <cac:IssuerParty>
+                        <cac:PartyIdentification>
+                            <cbc:ID t-att-schemeID="advance_lines['company_type_document']"
+                                    schemeName="Documento de Identidad"
+                                    schemeAgencyName="PE:SUNAT"
+                                    schemeURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo06"
+                                    t-esc="advance_lines['company_vat']"/>
+                        </cac:PartyIdentification>
+                    </cac:IssuerParty>
+                </cac:AdditionalDocumentReference>
+            </t>
+        </xpath>
+    </template>
+    <!-- TODO t-if="advance_lines_vals and record.move_type != 'out_refund'"
+                                    t-foreach="advance_lines_vals" t-as="advance_lines" -->
+    <template id="pe_ubl_2_1_common_inherit_l10n_pe_advance_global_discount_2" inherit_id="account_edi_ubl_cii.ubl_20_CommonType">
+        <xpath expr="//*[name()='cac:TaxTotal']" position="before">
+            <t xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+               xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+                <cac:PrepaidPayment t-foreach="advance_lines_vals" t-as="advance_lines">
+                    <cbc:ID schemeName="Anticipo" schemeAgencyName="PE:SUNAT" t-esc="advance_lines['index']"/>
+                    <cbc:PaidAmount t-att-currencyID="invoice.currency_id.name"
+                                    t-esc="format_float(advance_lines['tax_inclusive_amount'], vals.get('currency_dp'))"/>
+                </cac:PrepaidPayment>
+                <t t-if="discount_lines_vals">
+                    <cac:AllowanceCharge t-foreach="discount_lines_vals" t-as="discount_lines">
+                        <cbc:ChargeIndicator t-esc="discount_lines['discount_charge_indicator']"/>
+                        <cbc:AllowanceChargeReasonCode t-esc="discount_lines['discount_allowance_charge_reason_code']"/>
+                        <cbc:MultiplierFactorNumeric t-esc="format_float(discount_lines['discount_percent'], 5)"/>
+                        <cbc:Amount t-att-currencyID="invoice.currency_id.name"
+                                    t-esc="format_float(discount_lines['discount_amount'], vals.get('currency_dp'))"/>
+                        <cbc:BaseAmount t-att-currencyID="invoice.currency_id.name"
+                                        t-esc="format_float(discount_lines['base_amount'], vals.get('currency_dp'))"/>
+                    </cac:AllowanceCharge>
+                </t>
+            </t>
+        </xpath>
+    </template>
+    <!-- <template id="pe_ubl_2_1_common_inherit_l10n_pe_advance_global_discount_3" inherit_id="account_edi_ubl_cii.ubl_21_InvoiceType">
+        <xpath expr="//*[name()='cac:LegalMonetaryTotal']" position="attributes">
+            <attribute name="t-if">not total_advance</attribute>
+        </xpath>
+        <xpath expr="//*[name()='cac:LegalMonetaryTotal']" position="before">
+            <t t-if="total_advance" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+                   xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+                <cac:LegalMonetaryTotal>
+                    <cbc:LineExtensionAmount t-att-currencyID="vals['vals']['currency'].name"
+                            t-esc="format_float(abs(line_extension_amount), vals.get('currency_dp'))"/>
+                    <cbc:TaxInclusiveAmount t-att-currencyID="vals['vals']['currency'].name"
+                            t-esc="format_float(tax_inclusive_amount, vals.get('currency_dp'))"/>
+                    <cbc:PrepaidAmount t-att-currencyID="vals['vals']['currency'].name" t-esc="format_float(total_advance)"/>
+                    <cbc:PayableAmount t-att-currencyID="vals['vals']['currency'].name"
+                            t-esc="format_float(payable_amount or 0.0, vals.get('currency_dp'))"/>
+                </cac:LegalMonetaryTotal>
+            </t>
+        </xpath>
+    </template> -->
+    <template id="pe_ubl_2_1_invoice_body_inherit_l10n_pe_advance_global_discount" inherit_id="account_edi_ubl_cii.ubl_20_MonetaryTotalType">
+        <xpath expr="//*[name()='cbc:TaxInclusiveAmount']" position="after">
+            <t xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+                <cbc:AllowanceTotalAmount t-att-currencyID="vals['currency'].name"
+                                          t-esc="format_float(total_discount, vals.get('currency_dp'))"/>
+            </t>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+id_mail_mail_one,id_mail_mail_one,mass_mailing.model_mail_mail,dv_access_groups.group_crm_comercial,1,1,1,1
+id_mail_mail_two,id_mail_mail_two,mass_mailing.model_mail_mail,dv_access_groups.group_crm_preventa,1,1,1,1
+id_mail_mail_three,id_mail_mail_three,mass_mailing.model_mail_mail,dv_access_groups.group_crm_admin,1,1,1,1

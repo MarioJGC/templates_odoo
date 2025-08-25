@@ -1,0 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <menuitem action="account_batch_payment.action_batch_payment_out" id="account_batch_payment.menu_batch_payment_purchases" parent="account.menu_finance_payables" sequence="21" groups="account.group_account_invoice"/>
+</odoo>

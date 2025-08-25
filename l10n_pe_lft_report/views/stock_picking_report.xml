@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_report_picking_custom" model="ir.actions.report">
+            <field name="name">Guía de remisión electrónica</field>
+            <field name="model">stock.picking</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">l10n_pe_lft_report.report_picking_custom</field>
+            <field name="report_file">l10n_pe_lft_report.report_picking_custom</field>
+            <field name="print_report_name">'Guía de remisión - %s - %s' % (object.partner_id.name or '', object.name)
+            </field>
+            <field name="binding_model_id" ref="stock.model_stock_picking"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="l10n_pe_lft_report.paperformat_custom"/>
+        </record>
+
+        <record id="action_report_national_imported_merchandise_lft" model="ir.actions.report">
+            <field name="name">Recepcion de mercadería lft</field>
+            <field name="model">stock.picking</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">l10n_pe_lft_report.report_merchandise_custom_lft</field>
+            <field name="report_file">l10n_pe_lft_report.report_merchandise_custom_lft</field>
+            <field name="print_report_name">'Mercadería - %s - %s' % (object.partner_id.name or '', object.name)</field>
+            <field name="binding_model_id" ref="stock.model_stock_picking"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="l10n_pe_lft_report.paperformat_landscape_custom"/>
+            <field name="groups_id" eval="[(4, ref('l10n_pe_lft_report.group_access_service_order_report_lft'))]"/>
+        </record>
+
+        <record id="action_report_national_imported_merchandise_wurfel" model="ir.actions.report">
+            <field name="name">Recepcion de mercadería wurfel</field>
+            <field name="model">stock.picking</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">l10n_pe_lft_report.report_merchandise_custom_wurfel</field>
+            <field name="report_file">l10n_pe_lft_report.report_merchandise_custom_wurfel</field>
+            <field name="print_report_name">'Mercadería - %s - %s' % (object.partner_id.name or '', object.name)</field>
+            <field name="binding_model_id" ref="stock.model_stock_picking"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="l10n_pe_lft_report.paperformat_custom"/>
+            <field name="groups_id" eval="[(4, ref('l10n_pe_lft_report.group_access_service_order_report_wurfel'))]"/>
+        </record>
+
+        <record id="action_report_service_order_lft" model="ir.actions.report">
+            <field name="name">Orden de servicio lft</field>
+            <field name="model">purchase.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">l10n_pe_lft_report.report_service_order_custom_lft</field>
+            <field name="report_file">l10n_pe_lft_report.report_service_order_custom_lft</field>
+            <field name="print_report_name">'Orden de Servicio - %s - %s' % (object.partner_id.name or '',
+                object.name)
+            </field>
+            <field name="binding_model_id" ref="purchase.model_purchase_order"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="l10n_pe_lft_report.paperformat_custom"/>
+            <field name="groups_id" eval="[(4, ref('l10n_pe_lft_report.group_access_service_order_report_lft'))]"/>
+        </record>
+
+        <record id="action_report_service_order_wurfel" model="ir.actions.report">
+            <field name="name">Orden de servicio wurfel</field>
+            <field name="model">purchase.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">l10n_pe_lft_report.report_service_order_custom_wurfel</field>
+            <field name="report_file">l10n_pe_lft_report.report_service_order_custom_wurfel</field>
+            <field name="print_report_name">'Orden de Servicio - %s - %s' % (object.partner_id.name or '',
+                object.name)
+            </field>
+            <field name="binding_model_id" ref="purchase.model_purchase_order"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="l10n_pe_lft_report.paperformat_custom"/>
+            <field name="groups_id" eval="[(4, ref('l10n_pe_lft_report.group_access_service_order_report_wurfel'))]"/>
+        </record>
+
+        <!--        <menuitem id="menu_report_national_imported_merchandise"-->
+        <!--                  action="action_report_national_imported_merchandise"-->
+        <!--                  groups="base.group_user"-->
+        <!--                  domain="[('company_id.company_head_type', '=', 'lft')]"/>-->
+
+        <!--        <menuitem id="menu_report_national_imported_merchandise"-->
+        <!--                  action="action_report_national_imported_merchandise"-->
+        <!--                  groups="base.group_user"/>-->
+
+
+    </data>
+</odoo>

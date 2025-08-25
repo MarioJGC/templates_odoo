@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="message_activity_done_inherit" inherit_id="mail.message_activity_done">
+        <xpath expr="//div[@class='o_mail_note_title']" position="attributes">
+            <attribute name="t-attf-style">#{'display: none;' if activity.type_lead == 'privadas' else ''}</attribute>
+        </xpath>
+
+        <!-- Ocultar el contenido de activity.note -->
+        <xpath expr="//div[@t-field='activity.note']" position="attributes">
+            <attribute name="t-attf-style">#{'display: none;' if activity.type_lead == 'privadas' else ''}</attribute>
+        </xpath>
+
+        <xpath expr="//div[@t-if='feedback']" position="after">
+
+            <t t-if="activity.template_id and activity.type_lead == 'privadas'">
+                <div class="o-mail-Message-content o-min-width-0">
+                    <div class="o-mail-Message-textContent position-relative d-flex">
+                        <div class="position-relative overflow-x-auto d-inline-block">
+                            <div class="o-mail-Message-bubble rounded-bottom-3 position-absolute top-0 start-0 w-100 h-100 bg-info-light border border-info opacity-25 rounded-end-3">
+                            </div>
+                            <div class="position-relative text-break o-mail-Message-body mb-0 py-2 px-3 align-self-start rounded-end-3 rounded-bottom-3 p-1">
+                                <em class="mb-1 me-2">
+                                    Asunto: <t t-out="activity.summary or ''"/>
+                                </em>
+                                <div class="overflow-x-auto"/>
+                                <t t-out="activity.note or ''"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+
+            <div t-if="activity.start_date and activity.type_lead == 'privadas'">
+                <strong>Fecha de Inicio:</strong> <t t-out="activity.start_date"/>
+            </div>
+
+            <div t-if="activity.date_deadline and activity.type_lead == 'privadas'">
+                <strong>Fecha de Vencimiento:</strong> <t t-out="activity.date_deadline"/>
+            </div>
+
+        </xpath>
+    </template>
+</odoo>

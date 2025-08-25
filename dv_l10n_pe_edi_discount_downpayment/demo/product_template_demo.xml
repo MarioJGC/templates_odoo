@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="l10n_pe_product_advance" model="product.template">
+        <field name="name">Anticipo</field>
+        <field name="type">service</field>
+        <field name="l10n_pe_advance">True</field>
+        <field name="l10n_pe_charge_discount">04</field>
+    </record>
+</odoo>

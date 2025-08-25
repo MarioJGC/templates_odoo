@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <template id="external_layout_price_A4">
+
+        <div t-attf-class="article o_report_layout_standard" t-att-data-oe-model="o and doc._name"
+             t-att-data-oe-id="o and doc.id" t-att-data-oe-lang="o and doc.env.context.get('lang')">
+            <t t-out="0"/>
+        </div>
+
+        <div t-attf-class="footer o_standard_footer">
+            <div class="container" style="width: 100%;">
+                <div class="row" style="width: 100%;">
+                    <table class="table" style="font-size: 13px; width: 100%; border: 2px solid #3D3D3D; border-collapse: collapse;">
+                        <thead>
+                            <tr>
+                                <th colspan="5" style="text-align: center; color: black; background-color: #F2F2F2; border: 2px solid #3D3D3D;">
+                                    CUENTAS BANCARIAS
+                                </th>
+                                <th style="text-align: center; color: black; background-color: #F2F2F2; border: 2px solid #3D3D3D;">
+                                    QR CODE
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-if="doc.company_id.partner_id.bank_ids">
+                                <t t-foreach="doc.company_id.partner_id.bank_ids" t-as="bank" t-key="bank.id">
+                                    <tr style="color: #222; border-top: none; border-bottom: none;">
+                                        <!-- Columna 1: Información del banco -->
+                                        <td style="width: 31%; text-align: center; padding: 5px; border-right: none; border-bottom: none; border-top: none; border-left: 2px solid #3D3D3D;">
+                                            <p style="margin: 0; padding: 1px 0px; line-height: 1; text-align: center;">
+                                                <strong>Banco:</strong> <t t-esc="bank.bank_id.name or 'N/A'" />
+                                            </p>
+                                        </td>
+
+                                        <td style="width: 2%; text-align: center; padding: 5px; border-right: none; border-bottom: none; border-top: none; border-left: none;">
+                                            <p style="margin: 0; padding: 1px 0px; line-height: 1; text-align: center;">
+                                                /
+                                            </p>
+                                        </td>
+
+                                        <td style="width: 19%; text-align: center; padding: 5px; border-right: none; border-bottom: none; border-top: none; border-left: none;">
+                                            <p style="margin: 0; padding: 1px 0px; line-height: 1; text-align: center;">
+                                                <strong>Moneda:</strong> <t t-esc="bank.currency_id.name or 'N/A'" />
+                                            </p>
+                                        </td>
+
+                                        <td style="width: 2%; text-align: center; padding: 5px; border-right: none; border-bottom: none; border-top: none; border-left: none;">
+                                            <p style="margin: 0; padding: 1px 0px; line-height: 1; text-align: center;">
+                                                /
+                                            </p>
+                                        </td>
+
+                                        <td style="width: 31%; text-align: center; padding: 5px; border-right: none; border-bottom: none; border-top: none; border-left: none;">
+                                            <p style="margin: 0; padding: 1px 0px; line-height: 1; text-align: center;">
+                                                <strong>Número:</strong> <t t-esc="bank.acc_number or 'N/A'" />
+                                            </p>
+                                        </td>
+
+                                        <!-- Columna 3: QR Code (solo en la primera fila, usando rowspan dinámico) -->
+                                        <t t-if="bank == doc.company_id.partner_id.bank_ids[0]">
+                                            <td style="width: 15%; text-align: center; padding: 1px; border: 2px solid #3D3D3D;" 
+                                                t-att-rowspan="len(doc.company_id.partner_id.bank_ids)">
+                                                <t t-if="doc.show_qr_code and doc.qr_code_image">
+                                                    <img t-attf-src="data:image/png;base64,{{doc.qr_code_image}}"
+                                                        style="width: 85px; height: 85px; margin: 0px;" />
+                                                </t>
+                                            </td>
+                                        </t>
+                                    </tr>
+                                </t>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </template>
+</odoo>

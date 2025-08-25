@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="report_picking_custom">
+                <t t-call="web.html_container">
+                    <t t-foreach="docs" t-as="o">
+                        <div class="header">
+                            <div class="row">
+                                <t t-if="o.company_id.company_head_type  == 'lft'">
+                                    <t t-call="l10n_pe_lft_report.report_general_left_header"/>
+                                    <t t-call="l10n_pe_lft_report.report_right_header_stock_picking_lft"/>
+                                </t>
+                                <t t-if="o.company_id.company_head_type  == 'wurfel'">
+                                    <t t-call="l10n_pe_lft_report.report_general_left_header_wurfel"/>
+                                    <t t-call="l10n_pe_lft_report.report_right_header_stock_picking_wurfel"/>
+                                </t>
+                            </div>
+
+                        </div>
+                        <t t-call="web.internal_layout">
+                            <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
+                            <div class="page" style="margin-bottom: 100px;">
+                                <div class="oe_structure"/>
+                                <t t-if="o.company_id.company_head_type  == 'lft'">
+                                    <t t-call="l10n_pe_lft_report.report_after_header_stock_picking_lft"/>
+                                </t>
+                                <t t-if="o.company_id.company_head_type  == 'wurfel'">
+                                    <t t-call="l10n_pe_lft_report.report_after_header_stock_picking_wurfel"/>
+                                </t>
+
+                                <div class="oe_structure"></div>
+                                <t t-if="o.company_id.company_head_type  == 'lft'">
+                                    <t t-call="l10n_pe_lft_report.report_list_product_stock_picking_lft"/>
+                                </t>
+                                <t t-if="o.company_id.company_head_type  == 'wurfel'">
+                                    <t t-call="l10n_pe_lft_report.report_list_product_stock_picking_wurfel"/>
+                                </t>
+                                <div class="oe_structure"></div>
+                                <t t-if="o.company_id.company_head_type  == 'lft'">
+                                    <t t-call="l10n_pe_lft_report.report_information_stock_picking_lft"/>
+                                </t>
+                                <t t-if="o.company_id.company_head_type  == 'wurfel'">
+                                    <t t-call="l10n_pe_lft_report.report_information_stock_picking_wurfel"/>
+                                </t>
+                                <div id="right-elements">
+                                    <t t-if="o.company_id.company_head_type  == 'lft'">
+                                        <t t-call="l10n_pe_lft_report.report_table_observ_stock_picking_lft"/>
+                                    </t>
+                                    <t t-if="o.company_id.company_head_type  == 'wurfel'">
+                                        <t t-call="l10n_pe_lft_report.report_table_observ_stock_picking_wurfel"/>
+                                    </t>
+                                </div>
+<!--                                <div t-if="not (o.package_level_ids and o.picking_type_entire_packs and o.state in ['assigned', 'done'])"-->
+<!--                                     class="oe_structure"></div>-->
+<!--                                <table t-else="" class="table table-sm">-->
+<!--                                    <thead>-->
+<!--                                        <tr>-->
+<!--                                            <th name="th_package">Package</th>-->
+<!--                                            <th name="th_pko_from" t-if="o.picking_type_id.code != 'incoming'"-->
+<!--                                                groups="stock.group_stock_multi_locations">From-->
+<!--                                            </th>-->
+<!--                                            <th name="th_pki_from" t-elif="o.picking_type_id.code != 'outgoing'"-->
+<!--                                                groups="stock.group_stock_multi_locations">To-->
+<!--                                            </th>-->
+<!--                                        </tr>-->
+<!--                                    </thead>-->
+<!--                                    <tbody>-->
+<!--                                        <tr t-foreach="o.package_level_ids.sorted(key=lambda p: p.package_id.name)"-->
+<!--                                            t-as="package">-->
+<!--                                            <td name="td_pk_barcode">-->
+<!--                                                <t t-set="package" t-value="package.with_context(picking_id=o.id)"/>-->
+<!--                                                <div t-field="package.package_id.name"-->
+<!--                                                     t-options="{'widget': 'barcode', 'humanreadable': 1, 'width': 600, 'height': 100, 'img_style': 'width:300px;height:50px;margin-left: -50px;'}">-->
+<!--                                                    <div class="bg-light border-1 rounded d-flex flex-column align-items-center justify-content-center px-1 py-2  opacity-75 text-muted text-center">-->
+<!--                                                        (package barcode)-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                                <br/>-->
+<!--                                            </td>-->
+<!--                                            <td t-if="o.picking_type_id.code != 'incoming'"-->
+<!--                                                groups="stock.group_stock_multi_locations">-->
+<!--                                                <span t-field="package.location_id"/>-->
+<!--                                            </td>-->
+<!--                                            <td t-elif="o.picking_type_id.code != 'outgoing'"-->
+<!--                                                groups="stock.group_stock_multi_locations">-->
+<!--                                                <span t-field="package.location_dest_id"/>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                    </tbody>-->
+<!--                                </table>-->
+
+<!--                                <t t-set="no_reserved_product"-->
+<!--                                   t-value="o.move_ids.filtered(lambda x: x.product_uom_qty != x.quantity and x.move_line_ids and x.state!='done')"/>-->
+<!--                                <p t-if="o.state in ['draft', 'waiting', 'confirmed'] or no_reserved_product">-->
+<!--                                    <i class="fa fa-exclamation-triangle"/>-->
+<!--                                    All products could not be reserved. Click on the "Check Availability" button to try-->
+<!--                                    to-->
+<!--                                    reserve products.-->
+<!--                                </p>-->
+<!--                                <p t-else=""/>-->
+<!--                                <div class="oe_structure"></div>-->
+<!--                                <p t-field="o.note"/>-->
+<!--                                <div class="oe_structure"></div>-->
+                            </div>
+                        </t>
+                        <div class="footer">
+                            <div class="row text-center">
+                                <div class="col-3" t-if="report_type == 'pdf'" style="color:#595959">
+                                    Página:
+                                    <span class="page"/>
+                                    /
+                                    <span class="topage"/>
+                                </div>
+                                <div t-if="o.company_id.website" class="col-3 text-muted">
+                                    <span t-out="o.company_id.website">(website)</span>
+                                </div>
+                                <div t-if="o.company_id.social_facebook" class="col-3 text-muted">
+                                    <span t-out="o.company_id.social_facebook">(facebook)</span>
+                                </div>
+                                <div t-if="report_type == 'pdf' and display_name_in_footer" class="col-3 text-muted">
+                                    <span t-out="o.name">(document name)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+        </template>
+        <template id="report_picking_type_label">
+            <t t-set="title">Operation Types</t>
+            <t t-call="stock.report_generic_barcode"/>
+        </template>
+    </data>
+</odoo>

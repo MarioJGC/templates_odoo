@@ -1,0 +1,40 @@
+.square-container {
+    width: 50px; /* Ajusta el tamaño según tus necesidades */
+    height: 50; /* Ajusta el tamaño según tus necesidades */
+    border: 1px solid #000; /* Borde para visualizar el contenedor */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media print {
+    .row {
+        border-bottom: 1px solid #000;
+    }
+    .col-auto, .col-6 {
+        width: 50%;
+        float: left;
+    }
+    .mw-100 {
+        max-width: 100%;
+    }
+    .mb-2 {
+        margin-bottom: 0.5rem;
+    }
+    strong {
+        display: block;
+        margin-bottom: 0.2rem;
+    }
+    span {
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+}
+.atenuado {
+    background-color: rgba(0, 0, 0, 0.1); /* Color de fondo atenuado */
+    color: rgba(0, 0, 0, 0.6); /* Color del texto atenuado */
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f2f2f2;
+}

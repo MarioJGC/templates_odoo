@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="report_invoice_document_retention" inherit_id="account.report_invoice_document">
+            <xpath expr="//div[@id='qrcode']" position="after">
+                <table t-if="o.l10n_pe_is_subject_to_withholding" class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Base imponible de la retención</th>
+                            <th>Porcentaje de retención</th>
+                            <th>Monto de la retención</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <span t-field="o.amount_total" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                            </td>
+                            <td>
+                                <span t-esc="o.l10n_pe_withholding_code_percentage"/>%
+                            </td>
+                            <td>
+                                <span t-field="o.l10n_pe_withholding_amount_currency" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </xpath>
+        </template>
+    </data>
+</odoo>

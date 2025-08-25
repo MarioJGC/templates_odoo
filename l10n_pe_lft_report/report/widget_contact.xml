@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="custom_contact" inherit_id="base.contact">
+            <xpath expr="//div[@itemprop='address']" position="replace">
+            </xpath>
+        </template>
+    </data>
+</odoo>

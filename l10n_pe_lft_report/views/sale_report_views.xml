@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="sale.action_report_saleorder" model="ir.actions.report">
+            <field name="paperformat_id" ref="l10n_pe_lft_report.paperformat_custom"/>
+        </record>
+        <record id="sale_pdf_quote_builder.action_report_saleorder_raw" model="ir.actions.report">
+            <field name="paperformat_id" ref="l10n_pe_lft_report.paperformat_custom"/>
+        </record>
+        <record id="sale.action_report_saleorder" model="ir.actions.report">
+            <field name="paperformat_id" ref="l10n_pe_lft_report.paperformat_custom"/>
+        </record>
+    </data>
+</odoo>

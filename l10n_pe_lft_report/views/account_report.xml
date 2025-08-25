@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- QWeb Reports -->
+        <record id="account.account_invoices" model="ir.actions.report">
+            <field name="paperformat_id" ref="l10n_pe_lft_report.paperformat_custom"/>
+        </record>
+
+        <!--        <record id="action_account_original_vendor_bill" model="ir.actions.report">-->
+
+        <!--        </record>-->
+
+        <record id="account.account_invoices_without_payment" model="ir.actions.report">
+            <field name="paperformat_id" ref="l10n_pe_lft_report.paperformat_custom"/>
+        </record>
+
+        <!--        <record id="action_report_payment_receipt" model="ir.actions.report">-->
+
+        <!--        </record>-->
+
+    </data>
+</odoo>
